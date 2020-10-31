@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RentManager</string>
+    <string name="title_activity_add_address">AddAddressActivity</string>
 </resources>

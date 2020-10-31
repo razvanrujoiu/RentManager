@@ -23,7 +23,7 @@ public class User {
 
 
     @Embedded
-    private List<Residence> residences = new ArrayList<>();
+    private List<Residence> residences;
 
 
     public User(String userName, String userPassword, String telephoneNumber, String emailAddress, List<Residence> residences) {
