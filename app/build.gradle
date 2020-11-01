@@ -34,6 +34,8 @@ android {
         viewBinding = true
     }
 }
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -72,4 +74,8 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:1.1.1"
 
     kapt "android.arch.lifecycle:compiler:1.1.1"
+
+    //firebase
+    implementation platform('com.google.firebase:firebase-bom:26.0.0')
+    implementation 'com.google.firebase:firebase-auth'
 }

@@ -1,5 +1,20 @@
 <resources>
     <string name="app_name">RentManager</string>
+    <string name="welcome_back_message">Hey! Glad to have you back!</string>
+    <string name="user_mail">E-mail</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="not_registered">Don\'t have an account? Sign up </string>
+    <string name="welcome_message">Nice to meet you!</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="passwords_no_match_error">Passwords must match!</string>
+    <string name="weak_password_error">Password is too weak!</string>
+    <string name="invalid_email_error">E-mail is invalid!</string>
+    <string name="email_exists_error">E-mail already registered!</string>
+    <string name="bad_credentials_error">Bad credentials!</string>
+    <string name="empty_email_error">E-mail field must not be empty!</string>
+    <string name="empty_password_error">Password field must not be empty!</string>
+    <string name="register">Register</string>
     <string name="title_activity_add_address">AddAddressActivity</string>
     <string name="street_name">Street name</string>
     <string name="street_number">Street number</string>
