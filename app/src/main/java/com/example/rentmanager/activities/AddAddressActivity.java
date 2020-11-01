@@ -1,34 +1,95 @@
 package com.example.rentmanager.activities;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.rentmanager.database.DatabaseClient;
+import com.example.rentmanager.databinding.ActivityAddAddressBinding;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.View;
 
 import com.example.rentmanager.R;
+import com.example.rentmanager.models.Address;
 
 public class AddAddressActivity extends AppCompatActivity {
+
+    ActivityAddAddressBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_address);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        binding = ActivityAddAddressBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+    }
+
+    private void saveAddress() {
+        final String streetName = binding.streetName.getText().toString().trim();
+        final String streetNumber = binding.streetNumber.getText().toString().trim();
+        final String postalCode = binding.postalCode.getText().toString().trim();
+        final String city = binding.city.getText().toString().trim();
+        final String country = binding.country.toString().trim();
+
+        if (streetName.isEmpty()) {
+            binding.streetName.setError(getString(R.string.street_name_required_error));
+            binding.streetName.requestFocus();
+            return;
+        }
+
+        if (streetNumber.isEmpty()) {
+            binding.streetNumber.setError(getString(R.string.street_number_required_error));
+            binding.streetNumber.requestFocus();
+            return;
+        }
+
+        if (postalCode.isEmpty()) {
+            binding.postalCode.setError(getString(R.string.postal_code_required_error));
+            binding.postalCode.requestFocus();
+            return;
+        }
+
+        if (city.isEmpty()) {
+            binding.city.setError(getString(R.string.city_required_error));
+            binding.city.requestFocus();
+            return;
+        }
+
+        if(country.isEmpty()) {
+            binding.country.setError(getString(R.string.country_required_error));
+            binding.country.requestFocus();
+            return;
+        }
+
+        class SaveAddress  extends AsyncTask<Void, Void, Void> {
+
+
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            protected Void doInBackground(Void... voids) {
+
+                Address address = new Address(streetName,
+                        streetNumber,
+                        postalCode,
+                        city,
+                        country);
+
+                DatabaseClient.getInstance(getApplicationContext())
+                        .getRentManagerDatabase()
+                        .addressDao()
+                        .insert(address);
+                return null;
             }
-        });
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                finish();
+                Toast.makeText(getApplicationContext(), "Address added", Toast.LENGTH_LONG).show();
+            }
+        }
+
+        SaveAddress saveAddress = new SaveAddress();
+        saveAddress.execute();
     }
 
 }

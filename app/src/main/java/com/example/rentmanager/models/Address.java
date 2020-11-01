@@ -26,6 +26,14 @@ public class Address {
 
     private Long residenceIdForeignKey;
 
+    public Address(String streetName, String number, String postalCode, String city, String country) {
+        this.streetName = streetName;
+        this.number = number;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.country = country;
+    }
+
     public Address(String streetName, String number, String postalCode, String city, String country, Long residenceIdForeignKey) {
         this.streetName = streetName;
         this.number = number;

@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">RentManager</string>
     <string name="title_activity_add_address">AddAddressActivity</string>
+    <string name="street_name">Street name</string>
+    <string name="street_number">Street number</string>
+    <string name="postal_code">Postal code</string>
+    <string name="city">City</string>
+    <string name="add_address">Add address</string>
+    <string name="street_name_required_error">Street name required</string>
+    <string name="street_number_required_error">Street number required</string>
+    <string name="postal_code_required_error">Postal code required</string>
+    <string name="city_required_error">City required</string>
+    <string name="country_required_error">Country required</string>
 </resources>
