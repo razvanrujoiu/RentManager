@@ -23,7 +23,7 @@ public class User {
     private String emailAddress;
 
     @Embedded
-    private List<Residence> residences;
+    private ArrayList<Residence> residences;
 
     public User() {
         this.userName = "";
@@ -80,11 +80,11 @@ public class User {
         this.emailAddress = emailAddress;
     }
 
-    public List<Residence> getResidences() {
+    public ArrayList<Residence> getResidences() {
         return residences;
     }
 
-    public void setResidences(List<Residence> residences) {
+    public void setResidences(ArrayList<Residence> residences) {
         this.residences = residences;
     }
 }

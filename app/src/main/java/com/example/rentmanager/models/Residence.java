@@ -35,6 +35,8 @@ public class Residence {
 
     private Long userIdForeignKey;
 
+
+
     public Residence() {
         this.numberOfRooms = 0;
         this.isDetached = false;
@@ -48,7 +50,7 @@ public class Residence {
 
 
     @Ignore
-    public Residence(int numberOfRooms, boolean isDetached, double squareFeet, boolean hasBalcony, double constructionYear, double rentalPrice, String endRentalDate, Address address, Long userIdForeignKey) {
+    public Residence(int numberOfRooms, boolean isDetached, double squareFeet, boolean hasBalcony, double constructionYear, double rentalPrice, String endRentalDate, Long userIdForeignKey) {
         this.numberOfRooms = numberOfRooms;
         this.isDetached = isDetached;
         this.squareFeet = squareFeet;
@@ -56,7 +58,6 @@ public class Residence {
         this.constructionYear = constructionYear;
         this.rentalPrice = rentalPrice;
         this.endRentalDate = endRentalDate;
-        this.address = address;
         this.userIdForeignKey = userIdForeignKey;
     }
 

@@ -33,6 +33,7 @@ public class Address {
         this.postalCode = "";
         this.city = "";
         this.country = "";
+        this.residenceIdForeignKey = 0L;
     }
 
     @Ignore

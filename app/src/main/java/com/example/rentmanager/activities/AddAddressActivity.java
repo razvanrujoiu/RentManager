@@ -79,7 +79,7 @@ public class AddAddressActivity extends AppCompatActivity {
                         streetNumber,
                         postalCode,
                         city,
-                        country);
+                        country, 0L);
 
                 DatabaseClient.getInstance(getApplicationContext())
                         .getRentManagerDatabase()
