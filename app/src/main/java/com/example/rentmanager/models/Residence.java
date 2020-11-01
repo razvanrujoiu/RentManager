@@ -3,6 +3,7 @@ package com.example.rentmanager.models;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 
@@ -34,22 +35,19 @@ public class Residence {
 
     private Long userIdForeignKey;
 
-    public double getRentalPrice() {
-        return rentalPrice;
+    public Residence() {
+        this.numberOfRooms = 0;
+        this.isDetached = false;
+        this.squareFeet = 0.0;
+        this.hasBalcony = false;
+        this.constructionYear = 0.0;
+        this.rentalPrice = 0.0;
+        this.endRentalDate = "";
+        this.userIdForeignKey = 0L;
     }
 
-    public void setRentalPrice(double rentalPrice) {
-        this.rentalPrice = rentalPrice;
-    }
 
-    public String getEndRentalDate() {
-        return endRentalDate;
-    }
-
-    public void setEndRentalDate(String endRentalDate) {
-        this.endRentalDate = endRentalDate;
-    }
-
+    @Ignore
     public Residence(int numberOfRooms, boolean isDetached, double squareFeet, boolean hasBalcony, double constructionYear, double rentalPrice, String endRentalDate, Address address, Long userIdForeignKey) {
         this.numberOfRooms = numberOfRooms;
         this.isDetached = isDetached;
@@ -68,6 +66,22 @@ public class Residence {
 
     public void setResidenceId(Long residenceId) {
         this.residenceId = residenceId;
+    }
+
+    public double getRentalPrice() {
+        return rentalPrice;
+    }
+
+    public void setRentalPrice(double rentalPrice) {
+        this.rentalPrice = rentalPrice;
+    }
+
+    public String getEndRentalDate() {
+        return endRentalDate;
+    }
+
+    public void setEndRentalDate(String endRentalDate) {
+        this.endRentalDate = endRentalDate;
     }
 
     public int getNumberOfRooms() {

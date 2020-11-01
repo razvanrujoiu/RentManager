@@ -1,18 +1,19 @@
 package com.example.rentmanager.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.rentmanager.databinding.ActivityMainBinding;
+import com.example.rentmanager.databinding.ActivityAddResidenceBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class AddResidenceActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        ActivityAddResidenceBinding binding = ActivityAddResidenceBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
     }
+
+
 }

@@ -10,7 +10,7 @@ import com.example.rentmanager.models.Address;
 import com.example.rentmanager.models.Residence;
 import com.example.rentmanager.models.User;
 
-@Database(entities = {Address.class, Residence.class, User.class}, version = 1)
+@Database(entities = {Address.class, Residence.class, User.class}, version = 1, exportSchema = false)
 public abstract class RentManagerDatabase extends RoomDatabase {
 
     public abstract AddressDao addressDao();

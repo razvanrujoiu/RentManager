@@ -1,5 +1,6 @@
 package com.example.rentmanager.database.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 
@@ -11,6 +12,6 @@ import io.reactivex.rxjava3.core.Observable;
 public interface UserDao extends BaseDao<User> {
 
     @Query("SELECT * FROM User WHERE userId = :userId")
-    Observable<User> getUserById(Long userId);
+    LiveData<User> getUserById(Long userId);
 
 }

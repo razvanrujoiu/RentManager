@@ -2,6 +2,7 @@ package com.example.rentmanager.models;
 
 import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
@@ -21,17 +22,30 @@ public class User {
 
     private String emailAddress;
 
-
     @Embedded
     private List<Residence> residences;
 
+    public User() {
+        this.userName = "";
+        this.userPassword = "";
+        this.telephoneNumber = "";
+        this.emailAddress = "";
+    }
 
-    public User(String userName, String userPassword, String telephoneNumber, String emailAddress, List<Residence> residences) {
+    @Ignore
+    public User(String userName, String userPassword, String telephoneNumber, String emailAddress) {
         this.userName = userName;
         this.userPassword = userPassword;
         this.telephoneNumber = telephoneNumber;
         this.emailAddress = emailAddress;
-        this.residences = residences;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {

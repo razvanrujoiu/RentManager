@@ -1,5 +1,6 @@
 package com.example.rentmanager.database.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 
@@ -13,8 +14,8 @@ import io.reactivex.rxjava3.core.Observable;
 public interface ResidenceDao extends BaseDao<Residence> {
 
     @Query("SELECT * FROM Residence")
-    Observable<List<Residence>> getAllResidences();
+    LiveData<List<Residence>> getAllResidences();
 
     @Query("SELECT * FROM Residence WHERE userIdForeignKey = :userId")
-    Observable<Residence> getResidenceByUserId(Long userId);
+    LiveData<Residence> getResidenceByUserId(Long userId);
 }

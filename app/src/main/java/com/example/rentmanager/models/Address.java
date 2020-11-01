@@ -3,6 +3,7 @@ package com.example.rentmanager.models;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(foreignKeys = @ForeignKey(entity = Residence.class,
@@ -26,6 +27,15 @@ public class Address {
 
     private Long residenceIdForeignKey;
 
+    public Address() {
+        this.streetName = "";
+        this.number = "";
+        this.postalCode = "";
+        this.city = "";
+        this.country = "";
+    }
+
+    @Ignore
     public Address(String streetName, String number, String postalCode, String city, String country) {
         this.streetName = streetName;
         this.number = number;
@@ -34,6 +44,7 @@ public class Address {
         this.country = country;
     }
 
+    @Ignore
     public Address(String streetName, String number, String postalCode, String city, String country, Long residenceIdForeignKey) {
         this.streetName = streetName;
         this.number = number;

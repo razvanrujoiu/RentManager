@@ -9,7 +9,7 @@ import androidx.room.Update;
 public interface BaseDao<T> {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(T object);
+    Long insert(T object);
 
     @Update
     void update(T object);
