@@ -2,6 +2,7 @@ package com.example.rentmanager.activities;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.rentmanager.database.DatabaseClient;
@@ -21,6 +22,13 @@ public class AddAddressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityAddAddressBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        binding.addAddressBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveAddress();
+            }
+        });
 
     }
 
