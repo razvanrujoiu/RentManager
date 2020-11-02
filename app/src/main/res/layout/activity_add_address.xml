@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activities.AddAddressActivity">
 
-
     <EditText
         android:id="@+id/streetName"
         android:layout_width="wrap_content"

@@ -23,12 +23,7 @@ public class AddAddressActivity extends AppCompatActivity {
         binding = ActivityAddAddressBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.addAddressBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveAddress();
-            }
-        });
+        binding.addAddressBtn.setOnClickListener(view -> saveAddress());
 
     }
 

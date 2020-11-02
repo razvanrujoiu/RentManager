@@ -6,4 +6,121 @@
     android:layout_height="match_parent"
     tools:context=".activities.AddResidenceActivity">
 
+    <EditText
+        android:id="@+id/numberOfRooms"
+        android:layout_width="271dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="100dp"
+        android:ems="10"
+        android:hint="Number of rooms"
+        android:inputType="number"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioButton
+        android:id="@+id/isDetached"
+        android:layout_width="127dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="28dp"
+        android:text="Is detached"
+        app:layout_constraintEnd_toEndOf="@+id/numberOfRooms"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/numberOfRooms"
+        app:layout_constraintTop_toBottomOf="@+id/numberOfRooms" />
+
+    <SeekBar
+        android:id="@+id/seekBarSquareFeet"
+        android:layout_width="294dp"
+        android:layout_height="54dp"
+        android:min="0"
+        android:max="200"
+        android:progress="1"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/numberOfRooms"
+        app:layout_constraintStart_toStartOf="@+id/numberOfRooms"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="93dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="24dp"
+        android:text="Square feet:"
+        app:layout_constraintEnd_toEndOf="@+id/isDetached"
+        app:layout_constraintEnd_toStartOf="@+id/squareFeetTextView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/isDetached"
+        app:layout_constraintTop_toBottomOf="@+id/isDetached" />
+
+    <TextView
+        android:id="@+id/squareFeetTextView"
+        android:layout_width="146dp"
+        android:layout_height="35dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/hasBalcony"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+    <RadioButton
+        android:id="@+id/hasBalcony"
+        android:layout_width="140dp"
+        android:layout_height="45dp"
+        android:text="Has balcony"
+        app:layout_constraintBottom_toBottomOf="@+id/isDetached"
+        app:layout_constraintEnd_toEndOf="@+id/numberOfRooms"
+        app:layout_constraintStart_toEndOf="@+id/isDetached"
+        app:layout_constraintTop_toTopOf="@+id/isDetached" />
+
+    <EditText
+        android:id="@+id/constructionYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Construction year"
+        android:inputType="number"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/seekBarSquareFeet"
+        app:layout_constraintStart_toStartOf="@+id/seekBarSquareFeet"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarSquareFeet" />
+
+    <EditText
+        android:id="@+id/rentalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Rental price"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/constructionYear"
+        app:layout_constraintStart_toStartOf="@+id/constructionYear"
+        app:layout_constraintTop_toBottomOf="@+id/constructionYear" />
+
+    <EditText
+        android:id="@+id/endRentalDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="End rental date"
+        android:inputType="date"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/rentalPrice"
+        app:layout_constraintStart_toStartOf="@+id/rentalPrice"
+        app:layout_constraintTop_toBottomOf="@+id/rentalPrice" />
+
+    <Button
+        android:id="@+id/addResidence"
+        android:layout_width="199dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="24dp"
+        android:text="Add residence"
+        app:layout_constraintEnd_toEndOf="@+id/endRentalDate"
+        app:layout_constraintStart_toStartOf="@+id/endRentalDate"
+        app:layout_constraintTop_toBottomOf="@+id/endRentalDate" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

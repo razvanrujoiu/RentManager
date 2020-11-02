@@ -26,4 +26,7 @@
     <string name="postal_code_required_error">Postal code required</string>
     <string name="city_required_error">City required</string>
     <string name="country_required_error">Country required</string>
+    <string name="home">Home</string>
+    <string name="residences">Residences</string>
+    <string name="settings">Settings</string>
 </resources>

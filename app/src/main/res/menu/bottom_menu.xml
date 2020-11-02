@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_home"
+        android:enabled="true"
+        android:title="@string/home"
+        android:icon="@drawable/ic_baseline_format_list_bulleted_24"
+        android:contentDescription="@string/home"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_residence"
+        android:enabled="true"
+        android:title="@string/residences"
+        android:icon="@drawable/ic_baseline_home"
+        android:contentDescription="@string/residences"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_settings"
+        android:enabled="true"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_baseline_settings"
+        android:contentDescription="@string/settings"
+        app:showAsAction="ifRoom" />
+</menu>
