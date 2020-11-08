@@ -101,24 +101,12 @@ public class RegisterActivity extends AppCompatActivity {
         protected Void doInBackground(String... strings) {
             User registeredUser = new User();
             registeredUser.setEmailAddress(strings[0]);
-<<<<<<< Updated upstream
-            registeredUser.setUserPassword(hashPassword(strings[1]));
-
-            long userId = DatabaseClient.getInstance(getApplicationContext())
-                    .getRentManagerDatabase()
-                    .userDao()
-                    .insert(registeredUser);
-            storeUserIdToSharedPreferences(userId);
-=======
             registeredUser.setUserPassword(Utility.hashPassword(strings[1]));
-
             Long databaseUserId = DatabaseClient.getInstance(getApplicationContext())
                     .getRentManagerDatabase()
                     .userDao()
                     .insertUser(registeredUser);
             Utility.storeUserIdToSharedPreferences(getApplicationContext(),databaseUserId);
->>>>>>> Stashed changes
-
             return null;
         }
     }

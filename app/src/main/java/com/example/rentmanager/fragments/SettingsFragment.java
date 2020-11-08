@@ -118,7 +118,6 @@ public class SettingsFragment extends Fragment implements LifecycleOwner {
 
     private View.OnClickListener updateUserSettings() {
         return view -> {
-            UpdateUserFromRoomDatabase updateUserFromRoomDatabase = new UpdateUserFromRoomDatabase();
             String email = binding.userEmail.getText().toString();
             String password = binding.currentPassword.getText().toString();
             String newPassword = binding.newPassword.getText().toString();
@@ -129,14 +128,14 @@ public class SettingsFragment extends Fragment implements LifecycleOwner {
                         .addOnCompleteListener(task -> {
                             if(task.isSuccessful()) {
                                 loggedInUser.setEmailAddress(email);
-                                updateDatabaseFields(updateUserFromRoomDatabase, phoneNumber, username);
+                                updateDatabaseFields(phoneNumber, username);
                             } else {
                                 binding.userEmail.setError(task.getException().getMessage());
                                 binding.userEmail.requestFocus();
                             }
                         });
             } else {
-                updateDatabaseFields(updateUserFromRoomDatabase, phoneNumber, username);
+                updateDatabaseFields(phoneNumber, username);
             }
             if(Utility.hashPassword(password).equals(loggedInUser.getUserPassword())) {
                 if(!newPassword.isEmpty()) {
@@ -144,7 +143,7 @@ public class SettingsFragment extends Fragment implements LifecycleOwner {
                             .addOnCompleteListener(task -> {
                                 if (task.isSuccessful()) {
                                     loggedInUser.setUserPassword(Utility.hashPassword(newPassword));
-                                    updateDatabaseFields(updateUserFromRoomDatabase, phoneNumber, username);
+                                    updateDatabaseFields(phoneNumber, username);
                                 } else {
                                     binding.currentPassword.setError(task.getException().getMessage());
                                     binding.currentPassword.requestFocus();
@@ -163,7 +162,8 @@ public class SettingsFragment extends Fragment implements LifecycleOwner {
         };
     }
 
-    private void updateDatabaseFields(UpdateUserFromRoomDatabase updateUserFromRoomDatabase, String phoneNumber, String username) {
+    private void updateDatabaseFields(String phoneNumber, String username) {
+        UpdateUserFromRoomDatabase updateUserFromRoomDatabase = new UpdateUserFromRoomDatabase();
         loggedInUser.setTelephoneNumber(phoneNumber);
         loggedInUser.setUserName(username);
         updateUserFromRoomDatabase.execute();
