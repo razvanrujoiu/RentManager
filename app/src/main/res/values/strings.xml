@@ -35,4 +35,11 @@
     <string name="construction_year_required_error">Construction year required</string>
     <string name="rental_price_required_error">Rental price required</string>
     <string name="end_rental_date_required">End rental date required</string>
+    <string name="username">Username</string>
+    <string name="new_password">New password</string>
+    <string name="phone_number">Phone number</string>
+    <string name="update_settings">Update settings</string>
+    <string name="logout">Logout</string>
+    <string name="could_not_update_password">Could not update password!</string>
+    <string name="settings_updated">User settings were updated!</string>
 </resources>

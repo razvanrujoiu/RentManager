@@ -1,34 +1,25 @@
 package com.example.rentmanager.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.rentmanager.R;
+import com.example.rentmanager.Utils.Utility;
 import com.example.rentmanager.database.DatabaseClient;
 import com.example.rentmanager.database.FirebaseDatabase;
 import com.example.rentmanager.databinding.ActivityRegisterBinding;
 import com.example.rentmanager.models.User;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
     public static String TAG = "REGISTER ACTIVITY";
@@ -51,8 +42,6 @@ public class RegisterActivity extends AppCompatActivity {
             if (!checkCredentials(username, password, reppassword)) return;
             FirebaseDatabase.getInstance().registerUser(username,password).addOnCompleteListener(task -> {
                 if(task.isSuccessful()) {
-
-
                     SaveUserToRoomDatabase saveUserToRoomDatabase = new SaveUserToRoomDatabase();
                     saveUserToRoomDatabase.execute(username, password);
                     Toast.makeText(getApplicationContext(),"Register was successful!",Toast.LENGTH_LONG).show();
@@ -105,32 +94,14 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private String hashPassword(String password) {
-       String passwordHash = "";
-        try {
-            byte[] passwordByteArr = password.getBytes(StandardCharsets.UTF_8);
-            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-            byte[] passwordHashByteArr = messageDigest.digest(passwordByteArr);
-            passwordHash = Base64.encodeToString(passwordHashByteArr, 0);
 
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return passwordHash;
-    }
-
-    private void storeUserIdToSharedPreferences(long userId) {
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("user", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putLong("userId", userId);
-        editor.apply();
-    }
 
     class SaveUserToRoomDatabase extends AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... strings) {
             User registeredUser = new User();
             registeredUser.setEmailAddress(strings[0]);
+<<<<<<< Updated upstream
             registeredUser.setUserPassword(hashPassword(strings[1]));
 
             long userId = DatabaseClient.getInstance(getApplicationContext())
@@ -138,6 +109,15 @@ public class RegisterActivity extends AppCompatActivity {
                     .userDao()
                     .insert(registeredUser);
             storeUserIdToSharedPreferences(userId);
+=======
+            registeredUser.setUserPassword(Utility.hashPassword(strings[1]));
+
+            Long databaseUserId = DatabaseClient.getInstance(getApplicationContext())
+                    .getRentManagerDatabase()
+                    .userDao()
+                    .insertUser(registeredUser);
+            Utility.storeUserIdToSharedPreferences(getApplicationContext(),databaseUserId);
+>>>>>>> Stashed changes
 
             return null;
         }

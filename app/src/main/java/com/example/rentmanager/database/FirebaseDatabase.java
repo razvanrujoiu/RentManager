@@ -43,4 +43,18 @@ public class FirebaseDatabase {
         return false;
     }
 
+    public void logoutUser() {
+        firebaseAuth.signOut();
+    }
+
+    public Task<Void> changeUserEmail(String newEmail, String password) {
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        return user.updateEmail(newEmail);
+    }
+
+    public Task<Void> changeUserPassword(String password, String email) {
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        return user.updatePassword(password);
+    }
+
 }

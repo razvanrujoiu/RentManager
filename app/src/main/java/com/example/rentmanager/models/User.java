@@ -25,6 +25,7 @@ public class User {
     @Embedded
     private ArrayList<Residence> residences;
 
+    @Ignore
     public User() {
         this.userName = "";
         this.userPassword = "";
@@ -32,7 +33,6 @@ public class User {
         this.emailAddress = "";
     }
 
-    @Ignore
     public User(String userName, String userPassword, String telephoneNumber, String emailAddress) {
         this.userName = userName;
         this.userPassword = userPassword;
