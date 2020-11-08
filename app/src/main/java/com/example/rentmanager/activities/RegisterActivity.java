@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Base64;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.rentmanager.R;
+import com.example.rentmanager.database.DatabaseClient;
 import com.example.rentmanager.database.FirebaseDatabase;
 import com.example.rentmanager.databinding.ActivityRegisterBinding;
 import com.example.rentmanager.models.User;
@@ -26,6 +28,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
     public static String TAG = "REGISTER ACTIVITY";
@@ -48,10 +51,10 @@ public class RegisterActivity extends AppCompatActivity {
             if (!checkCredentials(username, password, reppassword)) return;
             FirebaseDatabase.getInstance().registerUser(username,password).addOnCompleteListener(task -> {
                 if(task.isSuccessful()) {
-                    User registeredUser = new User();
-                    registeredUser.setUserPassword(hashPassword(password));
-                    registeredUser.setEmailAddress(username);
-                    storeUserIdToSharedPreferences(registeredUser.getUserId());
+
+
+                    SaveUserToRoomDatabase saveUserToRoomDatabase = new SaveUserToRoomDatabase();
+                    saveUserToRoomDatabase.execute(username, password);
                     Toast.makeText(getApplicationContext(),"Register was successful!",Toast.LENGTH_LONG).show();
                     Handler handler = new Handler();
                     handler.postDelayed(this::finish,2000);
@@ -121,6 +124,24 @@ public class RegisterActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putLong("userId", userId);
         editor.apply();
+    }
+
+    class SaveUserToRoomDatabase extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... strings) {
+            User registeredUser = new User();
+            registeredUser.setEmailAddress(strings[0]);
+            registeredUser.setUserPassword(hashPassword(strings[1]));
+
+            storeUserIdToSharedPreferences(registeredUser.getUserId());
+
+            DatabaseClient.getInstance(getApplicationContext())
+                    .getRentManagerDatabase()
+                    .userDao()
+                    .insert(registeredUser);
+
+            return null;
+        }
     }
 
 

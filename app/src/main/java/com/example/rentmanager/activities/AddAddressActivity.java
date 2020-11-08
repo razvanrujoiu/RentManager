@@ -64,8 +64,7 @@ public class AddAddressActivity extends AppCompatActivity {
             return;
         }
 
-        class SaveAddress  extends AsyncTask<Void, Void, Void> {
-
+        class SaveAddress extends AsyncTask<Void, Void, Void> {
 
             @Override
             protected Void doInBackground(Void... voids) {
