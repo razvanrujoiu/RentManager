@@ -133,12 +133,11 @@ public class RegisterActivity extends AppCompatActivity {
             registeredUser.setEmailAddress(strings[0]);
             registeredUser.setUserPassword(hashPassword(strings[1]));
 
-            storeUserIdToSharedPreferences(registeredUser.getUserId());
-
-            DatabaseClient.getInstance(getApplicationContext())
+            long userId = DatabaseClient.getInstance(getApplicationContext())
                     .getRentManagerDatabase()
                     .userDao()
                     .insert(registeredUser);
+            storeUserIdToSharedPreferences(userId);
 
             return null;
         }

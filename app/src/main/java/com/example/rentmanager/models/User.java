@@ -12,7 +12,7 @@ import java.util.List;
 public class User {
 
     @PrimaryKey(autoGenerate = true)
-    private Long userId = 0L;
+    private Long userId;
 
     private String userName;
 

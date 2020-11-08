@@ -3,6 +3,7 @@ package com.example.rentmanager.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class AddResidenceActivity extends AppCompatActivity {
     ActivityAddResidenceBinding binding;
     private int squareFeetSeekBarValue = 0;
     final Calendar calendar = Calendar.getInstance();
+    long residenceId;
 
 
     @Override
@@ -142,7 +144,7 @@ public class AddResidenceActivity extends AppCompatActivity {
                         endRentalDate,
                         userIdForeignKey);
 
-                DatabaseClient.getInstance(getApplicationContext())
+                 residenceId = DatabaseClient.getInstance(getApplicationContext())
                         .getRentManagerDatabase()
                         .residenceDao()
                         .insert(residence);
@@ -155,6 +157,9 @@ public class AddResidenceActivity extends AppCompatActivity {
                 super.onPostExecute(aVoid);
                 finish();
                 Toast.makeText(getApplicationContext(), "Residence added", Toast.LENGTH_LONG).show();
+                Intent addAddressIntent = new Intent(getApplicationContext(), AddAddressActivity.class);
+                addAddressIntent.putExtra("residenceId", residenceId);
+                startActivity(addAddressIntent);
             }
         }
 

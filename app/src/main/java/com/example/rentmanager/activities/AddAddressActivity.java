@@ -16,6 +16,7 @@ import com.example.rentmanager.models.Address;
 public class AddAddressActivity extends AppCompatActivity {
 
     ActivityAddAddressBinding binding;
+    long residenceId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class AddAddressActivity extends AppCompatActivity {
         binding = ActivityAddAddressBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        residenceId = getIntent().getLongExtra("residenceId",0);
         binding.addAddressBtn.setOnClickListener(view -> saveAddress());
 
     }
@@ -73,7 +75,8 @@ public class AddAddressActivity extends AppCompatActivity {
                         streetNumber,
                         postalCode,
                         city,
-                        country, 0L);
+                        country,
+                        residenceId);
 
                 DatabaseClient.getInstance(getApplicationContext())
                         .getRentManagerDatabase()

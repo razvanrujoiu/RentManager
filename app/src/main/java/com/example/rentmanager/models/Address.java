@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey;
 public class Address {
 
     @PrimaryKey(autoGenerate = true)
-    private Long addressId = 0L;
+    private Long addressId;
 
     private String streetName;
 
