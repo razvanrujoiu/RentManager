@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
             FirebaseDatabase.getInstance().signInUser(email,password).addOnCompleteListener(task -> {
                 if(task.isSuccessful()) {
                     GetUserFromDatabaseByEmail getUserFromDatabaseByEmail = new GetUserFromDatabaseByEmail();
-                    getUserFromDatabaseByEmail.execute(email);
+                    getUserFromDatabaseByEmail.execute(email, password);
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(intent);
                 } else {
@@ -89,7 +89,19 @@ public class LoginActivity extends AppCompatActivity {
                     .getRentManagerDatabase()
                     .userDao()
                     .getUserByMail(strings[0]);
-            Utility.storeUserIdToSharedPreferences(getApplicationContext(), databaseResult.getUserId());
+            if (databaseResult == null) {
+                User user = new User();
+                user.setEmailAddress(strings[0]);
+                user.setUserPassword(Utility.hashPassword(strings[1]));
+                long userId = DatabaseClient.getInstance(getApplicationContext())
+                        .getRentManagerDatabase()
+                        .userDao()
+                        .insertUser(user);
+                Utility.storeUserIdToSharedPreferences(getApplicationContext(), userId);
+
+            } else {
+                Utility.storeUserIdToSharedPreferences(getApplicationContext(), databaseResult.getUserId());
+            }
             return null;
         }
     }
