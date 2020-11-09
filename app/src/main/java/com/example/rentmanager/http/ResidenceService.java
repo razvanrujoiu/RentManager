@@ -7,6 +7,6 @@ import retrofit2.http.GET;
 
 public interface ResidenceService {
 
-    @GET
+    @GET(".")
     Call<ResidenceList> getResidences();
 }

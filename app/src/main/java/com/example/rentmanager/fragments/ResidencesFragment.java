@@ -1,5 +1,6 @@
 package com.example.rentmanager.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -9,11 +10,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.rentmanager.R;
+import com.example.rentmanager.Utils.InternetConnection;
 import com.example.rentmanager.activities.AddAddressActivity;
 import com.example.rentmanager.activities.AddResidenceActivity;
 import com.example.rentmanager.databinding.FragmentResidencesBinding;
+import com.example.rentmanager.http.ResidenceService;
+import com.example.rentmanager.http.RetrofitClient;
+import com.example.rentmanager.models.Residence;
+import com.example.rentmanager.models.ResidenceList;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,20 +35,12 @@ import com.example.rentmanager.databinding.FragmentResidencesBinding;
  */
 public class ResidencesFragment extends Fragment implements View.OnClickListener {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private ArrayList<Residence> residences;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public ResidencesFragment() {
-        // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
     public static ResidencesFragment newInstance() {
         ResidencesFragment fragment = new ResidencesFragment();
         Bundle args = new Bundle();
@@ -46,10 +51,7 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        loadResidencesFromApi();
     }
 
     @Override
@@ -69,5 +71,26 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
 
+    }
+
+    void loadResidencesFromApi() {
+        if (InternetConnection.checkConnection(getContext())) {
+            ResidenceService residenceService = RetrofitClient.getResidenceService();
+            Call<ResidenceList> call = residenceService.getResidences();
+
+            call.enqueue(new Callback<ResidenceList>() {
+                @Override
+                public void onResponse(Call<ResidenceList> call, Response<ResidenceList> response) {
+                    if (response.isSuccessful()) {
+                        residences = response.body().getResidences();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResidenceList> call, Throwable t) {
+                    Toast.makeText(getContext(), "Error while fetching data from API", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }
