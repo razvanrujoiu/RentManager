@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,7 @@ import com.example.rentmanager.R;
 import com.example.rentmanager.Utils.InternetConnection;
 import com.example.rentmanager.activities.AddAddressActivity;
 import com.example.rentmanager.activities.AddResidenceActivity;
+import com.example.rentmanager.adapters.ResidenceAdapter;
 import com.example.rentmanager.databinding.FragmentResidencesBinding;
 import com.example.rentmanager.http.ResidenceService;
 import com.example.rentmanager.http.RetrofitClient;
@@ -35,8 +39,11 @@ import retrofit2.Response;
  */
 public class ResidencesFragment extends Fragment implements View.OnClickListener {
 
-    private ArrayList<Residence> residences;
+    private RecyclerView recyclerView;
+    private ResidenceAdapter adapter;
 
+    private ArrayList<Residence> residences;
+    LinearLayoutManager layoutManager;
 
     public ResidencesFragment() {
     }
@@ -52,13 +59,22 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loadResidencesFromApi();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_residences, container, false);
+
+        FragmentResidencesBinding binding = FragmentResidencesBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+
+        recyclerView = binding.residencesRecyclerView;
+
+        layoutManager = new LinearLayoutManager(getContext());
+
+        setRecyclerViewAdapter();
         Button btnAddResidence = view.findViewById(R.id.btnAddResidence);
         btnAddResidence.setOnClickListener(v -> {
             Intent addAddressActivityIntent = new Intent(getContext(), AddResidenceActivity.class);
@@ -66,6 +82,16 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
         });
 
         return view;
+    }
+
+    private void setRecyclerViewAdapter() {
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                layoutManager.getOrientation());
+        adapter = new ResidenceAdapter(getContext(), residences);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -83,6 +109,7 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
                 public void onResponse(Call<ResidenceList> call, Response<ResidenceList> response) {
                     if (response.isSuccessful()) {
                         residences = response.body().getResidences();
+                        setRecyclerViewAdapter();
                     }
                 }
 
