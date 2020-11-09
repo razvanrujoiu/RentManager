@@ -41,6 +41,7 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
 
     private RecyclerView recyclerView;
     private ResidenceAdapter adapter;
+    private FragmentResidencesBinding binding;
 
     private ArrayList<Residence> residences;
     LinearLayoutManager layoutManager;
@@ -60,6 +61,7 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
         super.onCreate(savedInstanceState);
         loadResidencesFromApi();
 
+
     }
 
     @Override
@@ -67,7 +69,7 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        FragmentResidencesBinding binding = FragmentResidencesBinding.inflate(inflater, container, false);
+        binding = FragmentResidencesBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
         recyclerView = binding.residencesRecyclerView;
@@ -75,20 +77,17 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
         layoutManager = new LinearLayoutManager(getContext());
 
         setRecyclerViewAdapter();
-        Button btnAddResidence = view.findViewById(R.id.btnAddResidence);
-        btnAddResidence.setOnClickListener(v -> {
-            Intent addAddressActivityIntent = new Intent(getContext(), AddResidenceActivity.class);
-            startActivity(addAddressActivityIntent);
-        });
+//        Button btnAddResidence = view.findViewById(R.id.btnAddResidence);
+//        btnAddResidence.setOnClickListener(v -> {
+//            Intent addAddressActivityIntent = new Intent(getContext(), AddResidenceActivity.class);
+//            startActivity(addAddressActivityIntent);
+//        });
 
         return view;
     }
 
     private void setRecyclerViewAdapter() {
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                layoutManager.getOrientation());
         adapter = new ResidenceAdapter(getContext(), residences);
-        recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
         adapter.notifyDataSetChanged();
@@ -108,6 +107,7 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
                 @Override
                 public void onResponse(Call<ResidenceList> call, Response<ResidenceList> response) {
                     if (response.isSuccessful()) {
+                        binding.progressBar.setVisibility(View.INVISIBLE);
                         residences = response.body().getResidences();
                         setRecyclerViewAdapter();
                     }
