@@ -59,8 +59,6 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadResidencesFromApi();
-
 
     }
 
@@ -77,11 +75,15 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
         layoutManager = new LinearLayoutManager(getContext());
 
         setRecyclerViewAdapter();
-//        Button btnAddResidence = view.findViewById(R.id.btnAddResidence);
-//        btnAddResidence.setOnClickListener(v -> {
-//            Intent addAddressActivityIntent = new Intent(getContext(), AddResidenceActivity.class);
-//            startActivity(addAddressActivityIntent);
-//        });
+
+        binding.btnGetResidencesFromApi.setOnClickListener(v -> {
+            if (residences != null) {
+                residences.clear();
+                adapter.notifyDataSetChanged();
+            }
+            binding.progressBar.setVisibility(View.VISIBLE);
+            loadResidencesFromApi();
+        });
 
         return view;
     }
