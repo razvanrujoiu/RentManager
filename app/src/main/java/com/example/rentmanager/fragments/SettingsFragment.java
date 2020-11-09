@@ -3,6 +3,9 @@ package com.example.rentmanager.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -27,9 +30,17 @@ import com.example.rentmanager.database.FirebaseDatabase;
 import com.example.rentmanager.databinding.FragmentSettingsBinding;
 import com.example.rentmanager.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+import static android.app.Activity.RESULT_OK;
 
 
 public class SettingsFragment extends Fragment implements LifecycleOwner {
@@ -80,7 +91,10 @@ public class SettingsFragment extends Fragment implements LifecycleOwner {
             startActivity(intent);
             getActivity().finish();
         });
+        binding.changeImage.setOnClickListener(updateUserImage());
+        binding.profileImage.setOnClickListener(updateUserImage());
         binding.updateButton.setOnClickListener(updateUserSettings());
+        FirebaseDatabase.getInstance().downloadProfilePhotoFromStorage(binding.profileImage,getContext());
         GetUserFromRoomDatabase getUserFromRoomDatabase = new GetUserFromRoomDatabase();
         getUserFromRoomDatabase.execute(sharedPreferences.getLong("userId", 0));
         return binding.getRoot();
@@ -113,6 +127,43 @@ public class SettingsFragment extends Fragment implements LifecycleOwner {
                     .userDao()
                     .updateUser(loggedInUser);
             return null;
+        }
+    }
+
+    private View.OnClickListener updateUserImage() {
+        return view -> {
+            Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+            photoPickerIntent.setType("image/*");
+            startActivityForResult(photoPickerIntent, 1);
+        };
+    }
+
+    private void handleFirebaseUpdate(Bitmap photo) {
+        FirebaseDatabase.getInstance().updateProfilePhotoIntoStorogage(photo)
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+                })
+                .addOnSuccessListener(taskSnapshot -> {
+                    Toast.makeText(getContext(),getString(R.string.upload_successful),Toast.LENGTH_LONG).show();
+                });
+    }
+
+    @Override
+    public void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+
+
+        if (resultCode == RESULT_OK) {
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContext().getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                binding.profileImage.setImageBitmap(selectedImage);
+                handleFirebaseUpdate(selectedImage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 

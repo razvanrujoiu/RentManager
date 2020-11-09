@@ -42,4 +42,6 @@
     <string name="logout">Logout</string>
     <string name="could_not_update_password">Could not update password!</string>
     <string name="settings_updated">User settings were updated!</string>
+    <string name="change_user_image">Change user image</string>
+    <string name="upload_successful">Profile photo successfully uploaded</string>
 </resources>
