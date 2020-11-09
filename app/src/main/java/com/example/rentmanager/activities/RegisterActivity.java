@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.example.rentmanager.R;
 import com.example.rentmanager.Utils.Utility;
 import com.example.rentmanager.database.DatabaseClient;
-import com.example.rentmanager.database.FirebaseDatabase;
+import com.example.rentmanager.database.Firebase.FirebaseDatabase;
 import com.example.rentmanager.databinding.ActivityRegisterBinding;
 import com.example.rentmanager.models.User;
 import com.google.android.gms.tasks.Task;

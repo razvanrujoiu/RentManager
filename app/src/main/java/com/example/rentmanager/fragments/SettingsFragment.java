@@ -9,14 +9,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,16 +21,9 @@ import com.example.rentmanager.R;
 import com.example.rentmanager.Utils.Utility;
 import com.example.rentmanager.activities.LoginActivity;
 import com.example.rentmanager.database.DatabaseClient;
-import com.example.rentmanager.database.FirebaseDatabase;
+import com.example.rentmanager.database.Firebase.FirebaseDatabase;
 import com.example.rentmanager.databinding.FragmentSettingsBinding;
 import com.example.rentmanager.models.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;

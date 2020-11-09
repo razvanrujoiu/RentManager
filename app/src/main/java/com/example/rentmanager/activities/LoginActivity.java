@@ -1,11 +1,6 @@
 package com.example.rentmanager.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,12 +12,9 @@ import android.view.View;
 import com.example.rentmanager.R;
 import com.example.rentmanager.Utils.Utility;
 import com.example.rentmanager.database.DatabaseClient;
-import com.example.rentmanager.database.FirebaseDatabase;
+import com.example.rentmanager.database.Firebase.FirebaseDatabase;
 import com.example.rentmanager.databinding.ActivityLoginBinding;
 import com.example.rentmanager.models.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 

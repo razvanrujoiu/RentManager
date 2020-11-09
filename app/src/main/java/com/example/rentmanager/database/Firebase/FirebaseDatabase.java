@@ -1,22 +1,16 @@
-package com.example.rentmanager.database;
+package com.example.rentmanager.database.Firebase;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-
-import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -83,16 +77,16 @@ public class FirebaseDatabase {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         StorageReference storageReference = firebaseStorage.getReference();
         StorageReference profilePhotoForUser = storageReference.child(user.getUid() + "/photo.jpg");
-        profilePhotoForUser.getDownloadUrl().addOnCompleteListener(task -> {
-            try {
-                Glide.with(context)
-                        .load(task.getResult().toString())
-                        .into(imageView);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-
+        try {
+            GlideApp.with(context)
+                    .load(profilePhotoForUser)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imageView);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+
 
 }
