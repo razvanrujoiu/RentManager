@@ -6,6 +6,9 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 
 @Entity(foreignKeys = @ForeignKey(entity = User.class,
         parentColumns = "userId",
@@ -16,26 +19,39 @@ public class Residence {
     @PrimaryKey (autoGenerate = true)
     private Long residenceId;
 
+    @SerializedName("numberOfRooms")
+    @Expose
     private int numberOfRooms;
 
+    @SerializedName("isDetached")
+    @Expose
     private boolean isDetached;
 
+    @SerializedName("squareFeet")
+    @Expose
     private double squareFeet;
 
+    @SerializedName("hasBalcony")
+    @Expose
     private boolean hasBalcony;
 
+    @SerializedName("constructionYear")
+    @Expose
     private double constructionYear;
 
+    @SerializedName("rentalPrice")
+    @Expose
     private double rentalPrice;
 
+    @SerializedName("endRentalDate")
     private String endRentalDate;
 
+    @SerializedName("address")
+    @Expose
     @Embedded
     private Address address;
 
     private Long userIdForeignKey;
-
-
 
     public Residence() {
         this.numberOfRooms = 0;
