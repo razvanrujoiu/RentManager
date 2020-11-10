@@ -18,4 +18,10 @@ public interface ResidenceDao extends BaseDao<Residence> {
 
     @Query("SELECT * FROM Residence WHERE userIdForeignKey = :userId")
     LiveData<Residence> getResidenceByUserId(Long userId);
+
+    @Query("SELECT * FROM Residence WHERE residenceId = :residenceId")
+    LiveData<Residence> getResidenceById(Long residenceId);
+
+    @Query("DELETE FROM Residence")
+    void deleteAllResidences();
 }

@@ -2,7 +2,6 @@ package com.example.rentmanager.activities;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.rentmanager.database.DatabaseClient;
@@ -12,11 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.rentmanager.R;
 import com.example.rentmanager.models.Address;
+import com.example.rentmanager.models.Residence;
+import com.example.rentmanager.viewmodels.ResidenceViewModel;
 
 public class AddAddressActivity extends AppCompatActivity {
 
     ActivityAddAddressBinding binding;
-    long residenceId;
+    Residence residenceFromIntent;
+    ResidenceViewModel residenceViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +26,10 @@ public class AddAddressActivity extends AppCompatActivity {
         binding = ActivityAddAddressBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        residenceId = getIntent().getLongExtra("residenceId",0);
         binding.addAddressBtn.setOnClickListener(view -> saveAddress());
 
+        residenceFromIntent = (Residence) getIntent().getSerializableExtra("residence");
+        residenceViewModel = new ResidenceViewModel(getApplication());
     }
 
     private void saveAddress() {
@@ -34,7 +37,7 @@ public class AddAddressActivity extends AppCompatActivity {
         final String streetNumber = binding.streetNumber.getText().toString().trim();
         final String postalCode = binding.postalCode.getText().toString().trim();
         final String city = binding.city.getText().toString().trim();
-        final String country = binding.country.toString().trim();
+        final String country = binding.country.getText().toString().trim();
 
         if (streetName.isEmpty()) {
             binding.streetName.setError(getString(R.string.street_name_required_error));
@@ -66,7 +69,7 @@ public class AddAddressActivity extends AppCompatActivity {
             return;
         }
 
-        class SaveAddress extends AsyncTask<Void, Void, Void> {
+        class SaveResidence extends AsyncTask<Void, Void, Void> {
 
             @Override
             protected Void doInBackground(Void... voids) {
@@ -75,13 +78,12 @@ public class AddAddressActivity extends AppCompatActivity {
                         streetNumber,
                         postalCode,
                         city,
-                        country,
-                        residenceId);
+                        country);
 
-                DatabaseClient.getInstance(getApplicationContext())
-                        .getRentManagerDatabase()
-                        .addressDao()
-                        .insert(address);
+                residenceFromIntent.setAddress(address);
+
+                residenceViewModel.insertResidence(residenceFromIntent);
+
                 return null;
             }
 
@@ -89,11 +91,11 @@ public class AddAddressActivity extends AppCompatActivity {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 finish();
-                Toast.makeText(getApplicationContext(), "Address added", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Residence added", Toast.LENGTH_LONG).show();
             }
         }
 
-        SaveAddress saveAddress = new SaveAddress();
+        SaveResidence saveAddress = new SaveResidence();
         saveAddress.execute();
     }
 

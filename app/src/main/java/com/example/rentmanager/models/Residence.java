@@ -9,12 +9,14 @@ import androidx.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 
 @Entity(foreignKeys = @ForeignKey(entity = User.class,
         parentColumns = "userId",
         childColumns = "userIdForeignKey",
         onDelete = ForeignKey.CASCADE))
-public class Residence {
+public class Residence implements Serializable {
 
     @PrimaryKey (autoGenerate = true)
     private Long residenceId;

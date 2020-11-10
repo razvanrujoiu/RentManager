@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/isDetached"
         android:layout_width="127dp"
         android:layout_height="49dp"
@@ -64,7 +64,7 @@
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="@+id/textView3" />
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/hasBalcony"
         android:layout_width="140dp"
         android:layout_height="45dp"
@@ -94,7 +94,7 @@
         android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Rental price"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/constructionYear"
         app:layout_constraintStart_toStartOf="@+id/constructionYear"

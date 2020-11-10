@@ -46,17 +46,15 @@ public class ResidenceAdapter extends RecyclerView.Adapter<ResidenceAdapter.Resi
 
         private ResidenceItemBinding binding;
 
-
         public ResidenceViewHolder(ResidenceItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-
         }
 
         public void bind(Residence residence) {
-            binding.residenceDetails.setText(String.format("Number of rooms: %d, \t Rental Price: %.2f \n Square Feet: %.2f \t Is detached: %b \n" +
-                            "Has Balcony: %b \t Construction year: %.0f \n Rental Price: %.2f \t End rental date: %s \n Address: \n" +
-                            "Street name: %s, %s \t Postal code: %s \n City: %s \t Country: %s",
+            binding.residenceDetails.setText(String.format("Number of rooms: %d, \nRental Price: %.2f \nSquare Feet: %.2f \nIs detached: %b \n" +
+                            "Has Balcony: %b \nConstruction year: %.0f \nRental Price: %.2f \nEnd rental date: %s \n\nAddress: \n" +
+                            "Street name: %s, %s \nPostal code: %s \nCity: %s \tCountry: %s",
                     residence.getNumberOfRooms(),
                     residence.getRentalPrice(),
                     residence.getSquareFeet(),

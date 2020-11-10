@@ -1,10 +1,12 @@
 package com.example.rentmanager.fragments;
 
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,8 +27,10 @@ import com.example.rentmanager.http.ResidenceService;
 import com.example.rentmanager.http.RetrofitClient;
 import com.example.rentmanager.models.Residence;
 import com.example.rentmanager.models.ResidenceList;
+import com.example.rentmanager.viewmodels.ResidenceViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,15 +46,17 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
     private RecyclerView recyclerView;
     private ResidenceAdapter adapter;
     private FragmentResidencesBinding binding;
-
-    private ArrayList<Residence> residences;
+    private static Application application;
+    private ArrayList<Residence> residences = new ArrayList<>();
     LinearLayoutManager layoutManager;
+    private ResidenceViewModel residenceViewModel;
 
     public ResidencesFragment() {
     }
 
-    public static ResidencesFragment newInstance() {
+    public static ResidencesFragment newInstance(Application app) {
         ResidencesFragment fragment = new ResidencesFragment();
+        application = app;
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -59,7 +65,12 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        residenceViewModel = new ResidenceViewModel(application);
 
+        residenceViewModel.getAllResidences().observe(this, residences -> {
+            this.residences.addAll(residences);
+            setRecyclerViewAdapter();
+        });
     }
 
     @Override

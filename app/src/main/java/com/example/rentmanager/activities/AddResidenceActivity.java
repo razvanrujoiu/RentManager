@@ -27,7 +27,6 @@ public class AddResidenceActivity extends AppCompatActivity {
     ActivityAddResidenceBinding binding;
     private int squareFeetSeekBarValue = 0;
     final Calendar calendar = Calendar.getInstance();
-    long residenceId;
 
 
     @Override
@@ -129,41 +128,16 @@ public class AddResidenceActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("user", MODE_PRIVATE);
         Long userIdForeignKey = sharedPreferences.getLong("userId", 0);
 
-
-        class SaveResidence extends AsyncTask<Void, Void, Void> {
-
-            @Override
-            protected Void doInBackground(Void... voids) {
-
-                Residence residence = new Residence(Integer.parseInt(numberOfRooms),
-                        isDetached,
-                        squareFeetSeekBarValue,
-                        hasBalcony,
-                        Double.parseDouble(constructionYear),
-                        Double.parseDouble(rentalPrice),
-                        endRentalDate,
-                        userIdForeignKey);
-
-                 residenceId = DatabaseClient.getInstance(getApplicationContext())
-                        .getRentManagerDatabase()
-                        .residenceDao()
-                        .insert(residence);
-
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                finish();
-                Toast.makeText(getApplicationContext(), "Residence added", Toast.LENGTH_LONG).show();
-                Intent addAddressIntent = new Intent(getApplicationContext(), AddAddressActivity.class);
-                addAddressIntent.putExtra("residenceId", residenceId);
-                startActivity(addAddressIntent);
-            }
-        }
-
-        SaveResidence saveResidence = new SaveResidence();
-        saveResidence.execute();
+        Residence residence = new Residence(Integer.parseInt(numberOfRooms),
+                isDetached,
+                squareFeetSeekBarValue,
+                hasBalcony,
+                Double.parseDouble(constructionYear),
+                Double.parseDouble(rentalPrice),
+                endRentalDate,
+                userIdForeignKey);
+        Intent addAddressIntent = new Intent(getApplicationContext(), AddAddressActivity.class);
+        addAddressIntent.putExtra("residence", residence);
+        startActivity(addAddressIntent);
     }
 }

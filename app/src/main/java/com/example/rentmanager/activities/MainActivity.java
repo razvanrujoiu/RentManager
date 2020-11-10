@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                     selectedFragment = HomeFragment.newInstance();
                     break;
                 case R.id.action_residence:
-                    selectedFragment = ResidencesFragment.newInstance();
+                    selectedFragment = ResidencesFragment.newInstance(getApplication());
                     break;
                 case R.id.action_settings:
                     selectedFragment = SettingsFragment.newInstance();
