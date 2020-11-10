@@ -1,5 +1,6 @@
 package com.example.rentmanager.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -27,7 +28,7 @@ public class AddResidenceActivity extends AppCompatActivity {
     ActivityAddResidenceBinding binding;
     private int squareFeetSeekBarValue = 0;
     final Calendar calendar = Calendar.getInstance();
-
+    int LAUNCH_ADD_ADDRESS_ACTIVITY = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +139,18 @@ public class AddResidenceActivity extends AppCompatActivity {
                 userIdForeignKey);
         Intent addAddressIntent = new Intent(getApplicationContext(), AddAddressActivity.class);
         addAddressIntent.putExtra("residence", residence);
-        startActivity(addAddressIntent);
+        startActivityForResult(addAddressIntent, LAUNCH_ADD_ADDRESS_ACTIVITY);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LAUNCH_ADD_ADDRESS_ACTIVITY) {
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(getApplicationContext(), "Residence added", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        }
+
     }
 }

@@ -20,7 +20,6 @@
     <string name="street_number">Street number</string>
     <string name="postal_code">Postal code</string>
     <string name="city">City</string>
-    <string name="add_address">Add address</string>
     <string name="street_name_required_error">Street name required</string>
     <string name="street_number_required_error">Street number required</string>
     <string name="postal_code_required_error">Postal code required</string>
@@ -44,4 +43,5 @@
     <string name="settings_updated">User settings were updated!</string>
     <string name="change_user_image">Change user image</string>
     <string name="upload_successful">Profile photo successfully uploaded</string>
+    <string name="add_address">Add address</string>
 </resources>
