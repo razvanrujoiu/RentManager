@@ -1,6 +1,7 @@
 package com.example.rentmanager.database.repositories;
 
 import android.app.Application;
+import android.provider.ContactsContract;
 
 import androidx.lifecycle.LiveData;
 
@@ -50,6 +51,12 @@ public class ResidenceRepository {
             addressRepository.insert(address);
         });
         return residenceId.get();
+    }
+
+    public void updateResidence(Residence residence) {
+        DatabaseClient.databaseWriteExecutor.execute(() -> {
+            residenceDao.update(residence);
+        });
     }
 
     public void deleteResidence(Residence residence) {
