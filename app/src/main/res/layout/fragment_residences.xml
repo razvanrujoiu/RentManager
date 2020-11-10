@@ -16,8 +16,15 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
+            android:id="@+id/btnDeleteAllResidences"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_gravity="center"
+            android:text="@string/clear_all" />
+
+        <Button
             android:id="@+id/btnGetResidencesFromApi"
-            android:text="Get data from API"
+            android:text="@string/get_data_from_api"
             android:layout_height="44dp"
             android:layout_width="wrap_content"
             android:layout_gravity="right" />

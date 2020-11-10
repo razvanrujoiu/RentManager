@@ -2,7 +2,9 @@ package com.example.rentmanager.fragments;
 
 import android.app.Application;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.rentmanager.R;
 import com.example.rentmanager.Utils.InternetConnection;
+import com.example.rentmanager.Utils.Utility;
 import com.example.rentmanager.activities.AddAddressActivity;
 import com.example.rentmanager.activities.AddResidenceActivity;
 import com.example.rentmanager.adapters.ResidenceAdapter;
@@ -96,6 +99,14 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
             loadResidencesFromApi();
         });
 
+        binding.btnDeleteAllResidences.setOnClickListener(v ->{
+            if(residences != null) {
+                residences.clear();
+                adapter.notifyDataSetChanged();
+                residenceViewModel.deleteAllResidences();
+            }
+        });
+
         return view;
     }
 
@@ -120,9 +131,14 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
                 @Override
                 public void onResponse(Call<ResidenceList> call, Response<ResidenceList> response) {
                     if (response.isSuccessful()) {
+                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+                        long userId = sharedPreferences.getLong("userId", 0);
+                        for (Residence residence: response.body().getResidences()) {
+                            residence.setUserIdForeignKey(userId);
+                            residenceViewModel.insertResidence(residence);
+                        }
                         binding.progressBar.setVisibility(View.INVISIBLE);
-                        residences = response.body().getResidences();
-                        setRecyclerViewAdapter();
+//                        setRecyclerViewAdapter();
                     }
                 }
 

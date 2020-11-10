@@ -44,4 +44,6 @@
     <string name="change_user_image">Change user image</string>
     <string name="upload_successful">Profile photo successfully uploaded</string>
     <string name="add_address">Add address</string>
+    <string name="get_data_from_api">Get data from API</string>
+    <string name="clear_all">Clear all</string>
 </resources>
