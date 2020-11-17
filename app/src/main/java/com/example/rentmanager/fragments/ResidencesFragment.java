@@ -35,6 +35,10 @@ import com.example.rentmanager.viewmodels.ResidenceViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Scheduler;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -107,8 +111,13 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
             }
         });
 
+        ResidenceAdapter.removeResidencePublisher.subscribe(residence ->
+                residenceViewModel.deleteResidence(residence)
+        );
+
         return view;
     }
+
 
     private void setRecyclerViewAdapter() {
         adapter = new ResidenceAdapter(getContext(), residences);

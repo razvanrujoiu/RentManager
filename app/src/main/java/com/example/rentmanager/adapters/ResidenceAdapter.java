@@ -4,19 +4,25 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.rentmanager.R;
 import com.example.rentmanager.databinding.ResidenceItemBinding;
 import com.example.rentmanager.models.Residence;
 
 import java.util.ArrayList;
 
+import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.PublishSubject;
+
 public class ResidenceAdapter extends RecyclerView.Adapter<ResidenceAdapter.ResidenceViewHolder> {
 
     private Context context;
     private ArrayList<Residence> residences;
+    public static PublishSubject<Residence> removeResidencePublisher = PublishSubject.create();
 
     public ResidenceAdapter(Context context, ArrayList<Residence> residences) {
         this.context = context;
@@ -42,7 +48,7 @@ public class ResidenceAdapter extends RecyclerView.Adapter<ResidenceAdapter.Resi
         return residences != null ? residences.size() : 0;
     }
 
-    public class ResidenceViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ResidenceViewHolder extends RecyclerView.ViewHolder {
 
         private ResidenceItemBinding binding;
 
@@ -69,11 +75,22 @@ public class ResidenceAdapter extends RecyclerView.Adapter<ResidenceAdapter.Resi
                     residence.getAddress().getCity(),
                     residence.getAddress().getCountry()
                     ));
-        }
 
-        @Override
-        public void onClick(View v) {
-
+            binding.deleteImageView.setOnClickListener(v -> {
+                residences.remove(residence);
+                notifyDataSetChanged();
+                removeResidencePublisher.onNext(residence);
+                Toast.makeText(context,"Residence has been removed",Toast.LENGTH_SHORT).show();
+            });
         }
     }
+
+
+
+    public PublishSubject<Residence> getRemoveResidencePublisher() {
+        return this.removeResidencePublisher;
+    }
+
+
+
 }
