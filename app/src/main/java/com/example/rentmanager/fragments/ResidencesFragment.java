@@ -37,6 +37,7 @@ import java.util.List;
 
 import io.reactivex.Scheduler;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
@@ -57,6 +58,8 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
     private ArrayList<Residence> residences = new ArrayList<>();
     LinearLayoutManager layoutManager;
     private ResidenceViewModel residenceViewModel;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
 
     public ResidencesFragment() {
     }
@@ -75,6 +78,7 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
         residenceViewModel = new ResidenceViewModel(application);
 
         residenceViewModel.getAllResidences().observe(this, residences -> {
+            this.residences.clear();
             this.residences.addAll(residences);
             setRecyclerViewAdapter();
         });
@@ -111,9 +115,9 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
             }
         });
 
-        ResidenceAdapter.removeResidencePublisher.subscribe(residence ->
+        compositeDisposable.add(ResidenceAdapter.removeResidencePublisher.subscribe(residence ->
                 residenceViewModel.deleteResidence(residence)
-        );
+        ));
 
         return view;
     }
@@ -157,5 +161,13 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
                 }
             });
         }
+    }
+
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.dispose();
     }
 }
