@@ -46,4 +46,5 @@
     <string name="add_address">Add address</string>
     <string name="get_data_from_api">Get data from API</string>
     <string name="clear_all">Clear all</string>
+    <string name="add_residence">Add residence</string>
 </resources>

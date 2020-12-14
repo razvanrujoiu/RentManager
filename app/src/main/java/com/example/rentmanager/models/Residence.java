@@ -27,7 +27,7 @@ public class Residence implements Serializable {
 
     @SerializedName("isDetached")
     @Expose
-    private boolean isDetached;
+    private boolean detached;
 
     @SerializedName("squareFeet")
     @Expose
@@ -57,7 +57,7 @@ public class Residence implements Serializable {
 
     public Residence() {
         this.numberOfRooms = 0;
-        this.isDetached = false;
+        this.detached = false;
         this.squareFeet = 0.0;
         this.hasBalcony = false;
         this.constructionYear = 0.0;
@@ -68,9 +68,9 @@ public class Residence implements Serializable {
 
 
     @Ignore
-    public Residence(int numberOfRooms, boolean isDetached, double squareFeet, boolean hasBalcony, double constructionYear, double rentalPrice, String endRentalDate, Long userIdForeignKey) {
+    public Residence(int numberOfRooms, boolean detached, double squareFeet, boolean hasBalcony, double constructionYear, double rentalPrice, String endRentalDate, Long userIdForeignKey) {
         this.numberOfRooms = numberOfRooms;
-        this.isDetached = isDetached;
+        this.detached = detached;
         this.squareFeet = squareFeet;
         this.hasBalcony = hasBalcony;
         this.constructionYear = constructionYear;
@@ -112,11 +112,11 @@ public class Residence implements Serializable {
     }
 
     public boolean isDetached() {
-        return isDetached;
+        return detached;
     }
 
     public void setDetached(boolean detached) {
-        isDetached = detached;
+        this.detached = detached;
     }
 
     public void setSquareFeet(double squareFeet) {
