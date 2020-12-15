@@ -21,6 +21,8 @@ public class Residence implements Serializable {
     @PrimaryKey (autoGenerate = true)
     private Long residenceId;
 
+
+
     @SerializedName("numberOfRooms")
     @Expose
     private int numberOfRooms;
