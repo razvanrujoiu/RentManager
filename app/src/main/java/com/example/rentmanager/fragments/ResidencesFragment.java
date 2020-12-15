@@ -2,7 +2,9 @@ package com.example.rentmanager.fragments;
 
 import android.app.Application;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.rentmanager.R;
 import com.example.rentmanager.Utils.InternetConnection;
+import com.example.rentmanager.Utils.Utility;
 import com.example.rentmanager.activities.AddAddressActivity;
 import com.example.rentmanager.activities.AddResidenceActivity;
 import com.example.rentmanager.adapters.ResidenceAdapter;
@@ -32,6 +35,11 @@ import com.example.rentmanager.viewmodels.ResidenceViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Scheduler;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,6 +58,8 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
     private ArrayList<Residence> residences = new ArrayList<>();
     LinearLayoutManager layoutManager;
     private ResidenceViewModel residenceViewModel;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
 
     public ResidencesFragment() {
     }
@@ -68,6 +78,7 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
         residenceViewModel = new ResidenceViewModel(application);
 
         residenceViewModel.getAllResidences().observe(this, residences -> {
+            this.residences.clear();
             this.residences.addAll(residences);
             setRecyclerViewAdapter();
         });
@@ -96,8 +107,21 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
             loadResidencesFromApi();
         });
 
+        binding.btnDeleteAllResidences.setOnClickListener(v ->{
+            if(residences != null) {
+                residences.clear();
+                adapter.notifyDataSetChanged();
+                residenceViewModel.deleteAllResidences();
+            }
+        });
+
+        compositeDisposable.add(ResidenceAdapter.removeResidencePublisher.subscribe(residence ->
+                residenceViewModel.deleteResidence(residence)
+        ));
+
         return view;
     }
+
 
     private void setRecyclerViewAdapter() {
         adapter = new ResidenceAdapter(getContext(), residences);
@@ -120,9 +144,14 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
                 @Override
                 public void onResponse(Call<ResidenceList> call, Response<ResidenceList> response) {
                     if (response.isSuccessful()) {
+                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+                        long userId = sharedPreferences.getLong("userId", 0);
+                        for (Residence residence: response.body().getResidences()) {
+                            residence.setUserIdForeignKey(userId);
+                            residenceViewModel.insertResidence(residence);
+                        }
                         binding.progressBar.setVisibility(View.INVISIBLE);
-                        residences = response.body().getResidences();
-                        setRecyclerViewAdapter();
+//                        setRecyclerViewAdapter();
                     }
                 }
 
@@ -132,5 +161,13 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
                 }
             });
         }
+    }
+
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.dispose();
     }
 }

@@ -34,6 +34,10 @@ public class ResidenceViewModel extends AndroidViewModel {
         return residenceRepository.insert(residence);
     }
 
+    public void updateResidence(Residence residence) {
+        residenceRepository.updateResidence(residence);
+    }
+
     public void deleteResidence(Residence residence) {
         residenceRepository.deleteResidence(residence);
     }

@@ -1,5 +1,7 @@
 package com.example.rentmanager.activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -90,8 +92,9 @@ public class AddAddressActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
+                Intent returnIntent = new Intent();
+                setResult(Activity.RESULT_OK, returnIntent);
                 finish();
-                Toast.makeText(getApplicationContext(), "Residence added", Toast.LENGTH_LONG).show();
             }
         }
 

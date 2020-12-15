@@ -3,6 +3,7 @@ package com.example.rentmanager.database.dao;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.rentmanager.models.Residence;
 
