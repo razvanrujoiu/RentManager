@@ -27,23 +27,22 @@ public class Route implements Serializable {
     @Expose
     private String estimatedTime;
 
+    // Very important, must use ArrayList, not List, otherwise compiler will give error
     @SerializedName("stationList")
     @Expose
     @Embedded
-    private List<Station> stationList;
+    private ArrayList<Station> stationList;
 
     private Long userIdForeignKey;
 
     public Route() {
         this.estimatedTime = "";
-        this.stationList = new ArrayList<>();
         this.userIdForeignKey = 0L;
     }
 
     @Ignore
-    public Route(String estimatedTime, List<Station> stationList, Long userIdForeignKey) {
+    public Route(String estimatedTime, Long userIdForeignKey) {
         this.estimatedTime = estimatedTime;
-        this.stationList = stationList;
         this.userIdForeignKey = userIdForeignKey;
     }
 
@@ -63,11 +62,12 @@ public class Route implements Serializable {
         this.estimatedTime = estimatedTime;
     }
 
-    public List<Station> getStationList() {
+    public ArrayList<Station> getStationList() {
         return stationList;
     }
 
-    public void setStationList(List<Station> stationList) {
+
+    public void setStationList(ArrayList<Station> stationList) {
         this.stationList = stationList;
     }
 

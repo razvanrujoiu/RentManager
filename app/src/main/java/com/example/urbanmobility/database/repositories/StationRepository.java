@@ -28,9 +28,9 @@ public class StationRepository {
         return allStations;
     }
 
-    LiveData<Station> getAddressByResidenceId(long residenceId) {
-        return stationDao.getStationsByRouteId(residenceId);
-    }
+//    LiveData<Station> getAddressByResidenceId(long residenceId) {
+//        return stationDao.getStationsByRouteId(residenceId);
+//    }
 
     Long insert(Station station) {
         AtomicLong addressId = new AtomicLong();

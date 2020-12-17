@@ -14,7 +14,7 @@ public interface StationDao extends BaseDao<Station> {
     @Query("SELECT * FROM Station")
     LiveData<List<Station>> getAllStations();
 
-    @Query("SELECT * FROM Station WHERE routeIdForeignKey = :id")
-    LiveData<Station> getStationsByRouteId(Long id);
+//    @Query("SELECT * FROM Station WHERE routeIdForeignKey = :id")
+//    LiveData<Station> getStationsByRouteId(Long id);
 
 }

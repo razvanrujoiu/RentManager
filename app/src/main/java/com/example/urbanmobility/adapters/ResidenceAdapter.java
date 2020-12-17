@@ -55,23 +55,23 @@ public class ResidenceAdapter extends RecyclerView.Adapter<ResidenceAdapter.Resi
         }
 
         public void bind(Route route) {
-            binding.residenceDetails.setText(String.format("Number of rooms: %d, \nRental Price: %.2f \nSquare Feet: %.2f \nIs detached: %b \n" +
-                            "Has Balcony: %b \nConstruction year: %.0f \nRental Price: %.2f \nEnd rental date: %s \n\nAddress: \n" +
-                            "Street name: %s, %s \nPostal code: %s \nCity: %s \tCountry: %s",
-                    route.getNumberOfRooms(),
-                    route.getRentalPrice(),
-                    route.getSquareFeet(),
-                    route.isDetached(),
-                    route.isHasBalcony(),
-                    route.getConstructionYear(),
-                    route.getRentalPrice(),
-                    route.getEstimatedTime(),
-                    route.getStation().getStreetName(),
-                    route.getStation().getStationName(),
-                    route.getStation().getArrivalHour(),
-                    route.getStation().getDepartureHour(),
-                    route.getStation().getCountry()
-                    ));
+//            binding.residenceDetails.setText(String.format("Number of rooms: %d, \nRental Price: %.2f \nSquare Feet: %.2f \nIs detached: %b \n" +
+//                            "Has Balcony: %b \nConstruction year: %.0f \nRental Price: %.2f \nEnd rental date: %s \n\nAddress: \n" +
+//                            "Street name: %s, %s \nPostal code: %s \nCity: %s \tCountry: %s",
+//                    route.getNumberOfRooms(),
+//                    route.getRentalPrice(),
+//                    route.getSquareFeet(),
+//                    route.isDetached(),
+//                    route.isHasBalcony(),
+//                    route.getConstructionYear(),
+//                    route.getRentalPrice(),
+//                    route.getEstimatedTime(),
+//                    route.getStation().getStreetName(),
+//                    route.getStation().getStationName(),
+//                    route.getStation().getArrivalHour(),
+//                    route.getStation().getDepartureHour(),
+//                    route.getStation().getCountry()
+//                    ));
 
             binding.deleteImageView.setOnClickListener(v -> {
                 routes.remove(route);
