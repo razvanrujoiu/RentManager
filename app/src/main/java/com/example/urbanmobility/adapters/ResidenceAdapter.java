@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urbanmobility.databinding.ResidenceItemBinding;
-import com.example.urbanmobility.models.Residence;
+import com.example.urbanmobility.models.Route;
 
 import java.util.ArrayList;
 
@@ -18,12 +18,12 @@ import io.reactivex.subjects.PublishSubject;
 public class ResidenceAdapter extends RecyclerView.Adapter<ResidenceAdapter.ResidenceViewHolder> {
 
     private Context context;
-    private ArrayList<Residence> residences;
-    public static PublishSubject<Residence> removeResidencePublisher = PublishSubject.create();
+    private ArrayList<Route> routes;
+    public static PublishSubject<Route> removeResidencePublisher = PublishSubject.create();
 
-    public ResidenceAdapter(Context context, ArrayList<Residence> residences) {
+    public ResidenceAdapter(Context context, ArrayList<Route> routes) {
         this.context = context;
-        this.residences = residences;
+        this.routes = routes;
     }
 
     @NonNull
@@ -36,13 +36,13 @@ public class ResidenceAdapter extends RecyclerView.Adapter<ResidenceAdapter.Resi
 
     @Override
     public void onBindViewHolder(@NonNull ResidenceViewHolder holder, int position) {
-        Residence residence = residences.get(position);
-        holder.bind(residence);
+        Route route = routes.get(position);
+        holder.bind(route);
     }
 
     @Override
     public int getItemCount() {
-        return residences != null ? residences.size() : 0;
+        return routes != null ? routes.size() : 0;
     }
 
     public class ResidenceViewHolder extends RecyclerView.ViewHolder {
@@ -54,29 +54,29 @@ public class ResidenceAdapter extends RecyclerView.Adapter<ResidenceAdapter.Resi
             this.binding = binding;
         }
 
-        public void bind(Residence residence) {
+        public void bind(Route route) {
             binding.residenceDetails.setText(String.format("Number of rooms: %d, \nRental Price: %.2f \nSquare Feet: %.2f \nIs detached: %b \n" +
                             "Has Balcony: %b \nConstruction year: %.0f \nRental Price: %.2f \nEnd rental date: %s \n\nAddress: \n" +
                             "Street name: %s, %s \nPostal code: %s \nCity: %s \tCountry: %s",
-                    residence.getNumberOfRooms(),
-                    residence.getRentalPrice(),
-                    residence.getSquareFeet(),
-                    residence.isDetached(),
-                    residence.isHasBalcony(),
-                    residence.getConstructionYear(),
-                    residence.getRentalPrice(),
-                    residence.getEndRentalDate(),
-                    residence.getAddress().getStreetName(),
-                    residence.getAddress().getNumber(),
-                    residence.getAddress().getPostalCode(),
-                    residence.getAddress().getCity(),
-                    residence.getAddress().getCountry()
+                    route.getNumberOfRooms(),
+                    route.getRentalPrice(),
+                    route.getSquareFeet(),
+                    route.isDetached(),
+                    route.isHasBalcony(),
+                    route.getConstructionYear(),
+                    route.getRentalPrice(),
+                    route.getEstimatedTime(),
+                    route.getStation().getStreetName(),
+                    route.getStation().getStationName(),
+                    route.getStation().getArrivalHour(),
+                    route.getStation().getDepartureHour(),
+                    route.getStation().getCountry()
                     ));
 
             binding.deleteImageView.setOnClickListener(v -> {
-                residences.remove(residence);
+                routes.remove(route);
                 notifyDataSetChanged();
-                removeResidencePublisher.onNext(residence);
+                removeResidencePublisher.onNext(route);
                 Toast.makeText(context,"Residence has been removed",Toast.LENGTH_SHORT).show();
             });
         }
@@ -84,7 +84,7 @@ public class ResidenceAdapter extends RecyclerView.Adapter<ResidenceAdapter.Resi
 
 
 
-    public PublishSubject<Residence> getRemoveResidencePublisher() {
+    public PublishSubject<Route> getRemoveResidencePublisher() {
         return this.removeResidencePublisher;
     }
 

@@ -5,7 +5,7 @@ import com.example.urbanmobility.models.ResidenceList;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface ResidenceService {
+public interface RouteService {
 
     @GET(".")
     Call<ResidenceList> getResidences();

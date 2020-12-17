@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.urbanmobility.activities.AddResidenceActivity;
+import com.example.urbanmobility.activities.AddRouteActivity;
 import com.example.urbanmobility.databinding.FragmentHomeBinding;
 
 
@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
         View view = binding.getRoot();
 
         binding.btnAddRoute.setOnClickListener(v -> {
-            Intent addAddressActivityIntent = new Intent(getContext(), AddResidenceActivity.class);
+            Intent addAddressActivityIntent = new Intent(getContext(), AddRouteActivity.class);
             startActivity(addAddressActivityIntent);
         });
         return view;

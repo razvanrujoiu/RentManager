@@ -6,43 +6,43 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.urbanmobility.database.repositories.ResidenceRepository;
-import com.example.urbanmobility.models.Residence;
+import com.example.urbanmobility.database.repositories.RouteRepository;
+import com.example.urbanmobility.models.Route;
 
 import java.util.List;
 
 public class ResidenceViewModel extends AndroidViewModel {
 
-    private ResidenceRepository residenceRepository;
-    private final LiveData<List<Residence>> allResidences;
+    private RouteRepository routeRepository;
+    private final LiveData<List<Route>> allResidences;
 
     public ResidenceViewModel(@NonNull Application application) {
         super(application);
-        residenceRepository = new ResidenceRepository(application);
-        allResidences = residenceRepository.getAllResidences();
+        routeRepository = new RouteRepository(application);
+        allResidences = routeRepository.getAllResidences();
     }
 
-    public LiveData<List<Residence>> getAllResidences() {
+    public LiveData<List<Route>> getAllResidences() {
         return allResidences;
     }
 
-    public LiveData<Residence> getResidenceById(long residenceId) {
-        return residenceRepository.getResidenceById(residenceId);
+    public LiveData<Route> getResidenceById(long residenceId) {
+        return routeRepository.getResidenceById(residenceId);
     }
 
-    public Long insertResidence(Residence residence) {
-        return residenceRepository.insert(residence);
+    public Long insertResidence(Route route) {
+        return routeRepository.insert(route);
     }
 
-    public void updateResidence(Residence residence) {
-        residenceRepository.updateResidence(residence);
+    public void updateResidence(Route route) {
+        routeRepository.updateResidence(route);
     }
 
-    public void deleteResidence(Residence residence) {
-        residenceRepository.deleteResidence(residence);
+    public void deleteResidence(Route route) {
+        routeRepository.deleteResidence(route);
     }
 
     public void deleteAllResidences() {
-        residenceRepository.deleteAllResidences();
+        routeRepository.deleteAllResidences();
     }
 }

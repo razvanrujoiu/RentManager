@@ -17,9 +17,9 @@ import android.widget.Toast;
 import com.example.urbanmobility.Utils.InternetConnection;
 import com.example.urbanmobility.adapters.ResidenceAdapter;
 import com.example.urbanmobility.databinding.FragmentResidencesBinding;
-import com.example.urbanmobility.http.ResidenceService;
+import com.example.urbanmobility.http.RouteService;
 import com.example.urbanmobility.http.RetrofitClient;
-import com.example.urbanmobility.models.Residence;
+import com.example.urbanmobility.models.Route;
 import com.example.urbanmobility.models.ResidenceList;
 import com.example.urbanmobility.viewmodels.ResidenceViewModel;
 
@@ -41,7 +41,7 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
     private ResidenceAdapter adapter;
     private FragmentResidencesBinding binding;
     private static Application application;
-    private ArrayList<Residence> residences = new ArrayList<>();
+    private ArrayList<Route> routes = new ArrayList<>();
     private LinearLayoutManager layoutManager;
     private ResidenceViewModel residenceViewModel;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -64,8 +64,8 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
         residenceViewModel = new ResidenceViewModel(application);
 
         residenceViewModel.getAllResidences().observe(this, residences -> {
-            this.residences.clear();
-            this.residences.addAll(residences);
+            this.routes.clear();
+            this.routes.addAll(residences);
             setRecyclerViewAdapter();
         });
     }
@@ -85,8 +85,8 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
         setRecyclerViewAdapter();
 
         binding.btnGetResidencesFromApi.setOnClickListener(v -> {
-            if (residences != null) {
-                residences.clear();
+            if (routes != null) {
+                routes.clear();
                 adapter.notifyDataSetChanged();
             }
             binding.progressBar.setVisibility(View.VISIBLE);
@@ -94,8 +94,8 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
         });
 
         binding.btnDeleteAllResidences.setOnClickListener(v ->{
-            if(residences != null) {
-                residences.clear();
+            if(routes != null) {
+                routes.clear();
                 adapter.notifyDataSetChanged();
                 residenceViewModel.deleteAllResidences();
             }
@@ -110,7 +110,7 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
 
 
     private void setRecyclerViewAdapter() {
-        adapter = new ResidenceAdapter(getContext(), residences);
+        adapter = new ResidenceAdapter(getContext(), routes);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
         adapter.notifyDataSetChanged();
@@ -123,8 +123,8 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
 
     void loadResidencesFromApi() {
         if (InternetConnection.checkConnection(getContext())) {
-            ResidenceService residenceService = RetrofitClient.getResidenceService();
-            Call<ResidenceList> call = residenceService.getResidences();
+            RouteService routeService = RetrofitClient.getResidenceService();
+            Call<ResidenceList> call = routeService.getResidences();
 
             call.enqueue(new Callback<ResidenceList>() {
                 @Override
@@ -132,9 +132,9 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
                     if (response.isSuccessful()) {
                         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
                         long userId = sharedPreferences.getLong("userId", 0);
-                        for (Residence residence: response.body().getResidences()) {
-                            residence.setUserIdForeignKey(userId);
-                            residenceViewModel.insertResidence(residence);
+                        for (Route route : response.body().getRoutes()) {
+                            route.setUserIdForeignKey(userId);
+                            residenceViewModel.insertResidence(route);
                         }
                         binding.progressBar.setVisibility(View.INVISIBLE);
 //                        setRecyclerViewAdapter();

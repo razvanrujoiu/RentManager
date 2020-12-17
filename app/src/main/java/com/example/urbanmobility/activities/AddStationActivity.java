@@ -10,14 +10,14 @@ import com.example.urbanmobility.databinding.ActivityAddAddressBinding;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.urbanmobility.R;
-import com.example.urbanmobility.models.Address;
-import com.example.urbanmobility.models.Residence;
+import com.example.urbanmobility.models.Route;
+import com.example.urbanmobility.models.Station;
 import com.example.urbanmobility.viewmodels.ResidenceViewModel;
 
-public class AddAddressActivity extends AppCompatActivity {
+public class AddStationActivity extends AppCompatActivity {
 
     ActivityAddAddressBinding binding;
-    Residence residenceFromIntent;
+    Route routeFromIntent;
     ResidenceViewModel residenceViewModel;
 
     @Override
@@ -28,7 +28,7 @@ public class AddAddressActivity extends AppCompatActivity {
 
         binding.addAddressBtn.setOnClickListener(view -> saveAddress());
 
-        residenceFromIntent = (Residence) getIntent().getSerializableExtra("residence");
+        routeFromIntent = (Route) getIntent().getSerializableExtra("residence");
         residenceViewModel = new ResidenceViewModel(getApplication());
     }
 
@@ -74,15 +74,14 @@ public class AddAddressActivity extends AppCompatActivity {
             @Override
             protected Void doInBackground(Void... voids) {
 
-                Address address = new Address(streetName,
-                        streetNumber,
-                        postalCode,
-                        city,
-                        country);
+//                Station station = new Station(streetName,
+//                        streetNumber,
+//                        postalCode,
+//                        city);
 
-                residenceFromIntent.setAddress(address);
+//                routeFromIntent.setStation(station);
 
-                residenceViewModel.insertResidence(residenceFromIntent);
+//                residenceViewModel.insertResidence(routeFromIntent);
 
                 return null;
             }
