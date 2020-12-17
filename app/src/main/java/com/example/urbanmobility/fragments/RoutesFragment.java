@@ -12,13 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.example.urbanmobility.Utils.InternetConnection;
-import com.example.urbanmobility.adapters.ResidenceAdapter;
-import com.example.urbanmobility.databinding.FragmentResidencesBinding;
+import com.example.urbanmobility.adapters.RouteAdapter;
+import com.example.urbanmobility.databinding.FragmentRoutesBinding;
 import com.example.urbanmobility.http.ResidenceService;
 import com.example.urbanmobility.http.RetrofitClient;
+import com.example.urbanmobility.models.MockRoute;
+import com.example.urbanmobility.models.MockStation;
 import com.example.urbanmobility.models.Residence;
 import com.example.urbanmobility.models.ResidenceList;
 import com.example.urbanmobility.viewmodels.ResidenceViewModel;
@@ -32,14 +35,14 @@ import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ResidencesFragment#newInstance} factory method to
+ * Use the {@link RoutesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ResidencesFragment extends Fragment implements View.OnClickListener {
+public class RoutesFragment extends Fragment implements View.OnClickListener {
 
-    private RecyclerView recyclerView;
-    private ResidenceAdapter adapter;
-    private FragmentResidencesBinding binding;
+    private ExpandableListView expandableListView;
+    private RouteAdapter adapter;
+    private FragmentRoutesBinding binding;
     private static Application application;
     private ArrayList<Residence> residences = new ArrayList<>();
     private LinearLayoutManager layoutManager;
@@ -47,11 +50,11 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 
-    public ResidencesFragment() {
+    public RoutesFragment() {
     }
 
-    public static ResidencesFragment newInstance(Application app) {
-        ResidencesFragment fragment = new ResidencesFragment();
+    public static RoutesFragment newInstance(Application app) {
+        RoutesFragment fragment = new RoutesFragment();
         application = app;
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -75,10 +78,10 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        binding = FragmentResidencesBinding.inflate(inflater, container, false);
+        binding = FragmentRoutesBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        recyclerView = binding.residencesRecyclerView;
+        expandableListView = binding.expandableRoutesList;
 
         layoutManager = new LinearLayoutManager(getContext());
 
@@ -101,18 +104,33 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
             }
         });
 
-        compositeDisposable.add(ResidenceAdapter.removeResidencePublisher.subscribe(residence ->
-                residenceViewModel.deleteResidence(residence)
-        ));
+//        compositeDisposable.add(RouteAdapter.removeResidencePublisher.subscribe(residence ->
+//                residenceViewModel.deleteResidence(residence)
+//        ));
 
         return view;
     }
 
 
     private void setRecyclerViewAdapter() {
-        adapter = new ResidenceAdapter(getContext(), residences);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(layoutManager);
+        MockStation mockStation = new MockStation("dasda","asdasd","dasda","asdasd");
+        MockStation mockStation1 = new MockStation("dasda","asdasd","dasda","asdasd");
+        MockStation mockStation2 = new MockStation("dasda","asdasd","dasda","asdasd");
+        MockStation mockStation3 = new MockStation("dasda","asdasd","dasda","asdasd");
+        ArrayList<MockStation> stations = new ArrayList<>();
+        stations.add(mockStation);
+        stations.add(mockStation1);
+        stations.add(mockStation2);
+        stations.add(mockStation3);
+        MockRoute mockRoute = new MockRoute(4,34,31,stations);
+        MockRoute mockRoute1 = new MockRoute(4,34,31,stations);
+        MockRoute mockRoute2 = new MockRoute(4,34,31,stations);
+        ArrayList<MockRoute> routes = new ArrayList<>();
+        routes.add(mockRoute);
+        routes.add(mockRoute1);
+        routes.add(mockRoute2);
+        adapter = new RouteAdapter(getContext(),routes);
+        expandableListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 

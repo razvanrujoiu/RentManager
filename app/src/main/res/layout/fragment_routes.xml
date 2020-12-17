@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ResidencesFragment">
+    tools:context=".fragments.RoutesFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -42,20 +42,6 @@
             tools:layout_editor_absoluteY="5dp" />
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/residencesRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/white"
-        android:overScrollMode="never"
-        android:scrollbarThumbVertical="@null"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="150dp"
@@ -63,9 +49,22 @@
         android:indeterminate="true"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/residencesRecyclerView"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/residencesRecyclerView"
-        app:layout_constraintTop_toTopOf="@+id/residencesRecyclerView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <ExpandableListView
+        android:id="@+id/expandableRoutesList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:childDivider="@null"
+        android:divider="@null"
+        android:layoutDirection="rtl"
+        android:overScrollMode="never"
+        android:scrollbarThumbVertical="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

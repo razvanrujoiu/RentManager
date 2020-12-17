@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urbanmobility.databinding.NotificationItemBinding;
-import com.example.urbanmobility.databinding.ResidenceItemBinding;
 import com.example.urbanmobility.models.Notification;
 
 import java.util.ArrayList;

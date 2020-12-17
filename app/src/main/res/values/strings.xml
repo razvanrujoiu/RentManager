@@ -54,5 +54,7 @@
         Mobility</string>
     <string name="ride_safe_ride_smart">Ride safe.
         Ride smart.</string>
+    <string name="route_number">Route number:</string>
+    <string name="estimated_route_time">Estimated route time:</string>
 
 </resources>
