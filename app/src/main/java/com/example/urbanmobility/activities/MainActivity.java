@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.action_home:
                     selectedFragment = HomeFragment.newInstance();
                     break;
-                case R.id.action_residence:
+                case R.id.action_routes:
                     selectedFragment = ResidencesFragment.newInstance(getApplication());
                     break;
                 case R.id.action_settings:

@@ -9,12 +9,21 @@
         android:contentDescription="@string/home"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_residence"
+        android:id="@+id/action_routes"
         android:enabled="true"
         android:title="@string/routes"
         android:icon="@drawable/ic_baseline_alt_route_24"
         android:contentDescription="@string/routes"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_location"
+        android:enabled="true"
+        android:title="@string/location"
+        android:icon="@drawable/ic_baseline_location_on_24"
+        android:contentDescription="@string/location"
+        app:showAsAction="ifRoom" />
+
     <item
         android:id="@+id/action_settings"
         android:enabled="true"

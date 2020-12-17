@@ -1,42 +1,41 @@
 {
   "project_info": {
-    "project_number": "529074887862",
-    "firebase_url": "https://rentmanager-5ccd0.firebaseio.com",
-    "project_id": "rentmanager-5ccd0",
-    "storage_bucket": "rentmanager-5ccd0.appspot.com"
+    "project_number": "179389109249",
+    "project_id": "urbanmobility-e941b",
+    "storage_bucket": "urbanmobility-e941b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:529074887862:android:de1543610f46d9fe6f1a17",
+        "mobilesdk_app_id": "1:179389109249:android:57d473bd5cfc0727ff9c00",
         "android_client_info": {
-          "package_name": "com.example.rentmanager"
+          "package_name": "com.example.urbanmobility"
         }
       },
       "oauth_client": [
         {
-          "client_id": "529074887862-m9j0e3r2nlqpiksbcc31h6ab567have1.apps.googleusercontent.com",
+          "client_id": "179389109249-8qonopn8viu4ijblv4air5jkitb8sqss.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.rentmanager",
-            "certificate_hash": "ea469eb0c1c0c6bc2e8ac0597fff2ab263ab7a5d"
+            "package_name": "com.example.urbanmobility",
+            "certificate_hash": "3416639f79b8f8e2f433431a72a26677ecfec1b4"
           }
         },
         {
-          "client_id": "529074887862-23mm0ca6idpu4vtdrglpbotm6ltj5ui8.apps.googleusercontent.com",
+          "client_id": "179389109249-qo3bp7890ron5s5v87rm3c3hjtjhclt3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA3-mnCRP8IFBNHlNEETw2duZTuFFI9274"
+          "current_key": "AIzaSyALLF9ujTv4O82BpF8tVeqwFtvWL3-UnOw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "529074887862-23mm0ca6idpu4vtdrglpbotm6ltj5ui8.apps.googleusercontent.com",
+              "client_id": "179389109249-qo3bp7890ron5s5v87rm3c3hjtjhclt3.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
