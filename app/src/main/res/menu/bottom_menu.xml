@@ -25,6 +25,15 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/action_notifications"
+        android:enabled="true"
+        android:title="@string/notifications"
+        android:icon="@drawable/ic_baseline_notifications_24"
+        android:contentDescription="@string/notifications"
+        app:showAsAction="ifRoom" />
+
+
+    <item
         android:id="@+id/action_settings"
         android:enabled="true"
         android:title="@string/settings"

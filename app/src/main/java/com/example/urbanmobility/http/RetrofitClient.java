@@ -7,16 +7,21 @@ public class RetrofitClient {
 
     public static final String BASE_URL = "https://api.mocki.io/v1/75be872d/";
 
-    private static Retrofit getRetrofitInstance() {
+    public static final String NOTIFICATIONS_URL = "https://api.mocki.io/v1/cb06c5b6/";
+
+    private static Retrofit getRetrofitInstance(String url) {
         return new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 
     public static ResidenceService getResidenceService() {
-        return getRetrofitInstance().create(ResidenceService.class);
+        return getRetrofitInstance(BASE_URL).create(ResidenceService.class);
     }
 
+    public static NotificationService getNotificationService() {
+        return getRetrofitInstance(NOTIFICATIONS_URL).create(NotificationService.class);
+    }
 
 }

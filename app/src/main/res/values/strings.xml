@@ -49,4 +49,5 @@
     <string name="add_residence">Add residence</string>
     <string name="routes">Routes</string>
     <string name="location">Location</string>
+    <string name="notifications">Notifications</string>
 </resources>
