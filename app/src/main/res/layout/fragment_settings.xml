@@ -13,126 +13,153 @@
         android:scrollbarThumbVertical="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <View
+                android:id="@+id/view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/custom_view_rounded_corner_bottom"
+                app:layout_constraintBottom_toTopOf="@+id/guideline2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
-                android:src="@drawable/user"
-                app:civ_border_color="#FF000000"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:src="@drawable/person"
+                android:tint="@color/white"
+                android:tintMode="screen"
+                app:civ_border_color="#FFFFFF"
                 app:civ_border_width="2dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/textView4"
-                app:layout_constraintStart_toStartOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/textView4"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintEnd_toStartOf="@+id/userEmail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/settings"
+                android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.060000002" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/userEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/custom_view_background"
                 android:ems="10"
                 android:hint="@string/user_mail"
                 android:inputType="textPersonName|textEmailAddress"
+                android:padding="10dp"
                 android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/change_image"
-                app:layout_constraintStart_toStartOf="@+id/change_image"
-                app:layout_constraintTop_toBottomOf="@+id/change_image"
-                app:layout_constraintVertical_bias="0.0" />
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/profile_image" />
 
             <EditText
                 android:id="@+id/currentPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:background="@drawable/custom_green_view_background"
                 android:ems="10"
                 android:hint="@string/password"
                 android:inputType="textPassword"
+                android:padding="10dp"
                 android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@android:color/holo_green_light"
+                android:textColorHint="@android:color/holo_green_light"
                 app:layout_constraintEnd_toEndOf="@+id/userEmail"
-                app:layout_constraintStart_toStartOf="@+id/userEmail"
-                app:layout_constraintTop_toBottomOf="@+id/userUsername"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toStartOf="@+id/profile_image"
+                app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
             <EditText
                 android:id="@+id/newPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:background="@drawable/custom_green_view_background"
                 android:ems="10"
                 android:hint="@string/new_password"
                 android:inputType="textPassword"
+                android:padding="10dp"
                 android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@android:color/holo_green_light"
+                android:textColorHint="@android:color/holo_green_light"
                 app:layout_constraintEnd_toEndOf="@+id/currentPassword"
                 app:layout_constraintStart_toStartOf="@+id/currentPassword"
-                app:layout_constraintTop_toBottomOf="@+id/currentPassword"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/currentPassword" />
 
             <EditText
                 android:id="@+id/userUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:background="@drawable/custom_view_background"
                 android:ems="10"
                 android:hint="@string/username"
                 android:inputType="textPersonName"
+                android:padding="10dp"
                 android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 app:layout_constraintEnd_toEndOf="@+id/userEmail"
                 app:layout_constraintStart_toStartOf="@+id/userEmail"
-                app:layout_constraintTop_toBottomOf="@+id/userEmail"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/userEmail" />
 
             <EditText
                 android:id="@+id/phoneNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:background="@drawable/custom_green_view_background"
                 android:ems="10"
                 android:hint="@string/phone_number"
                 android:inputType="phone"
+                android:padding="10dp"
                 android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@android:color/holo_green_light"
+                android:textColorHint="@android:color/holo_green_light"
                 app:layout_constraintEnd_toEndOf="@+id/newPassword"
                 app:layout_constraintStart_toStartOf="@+id/newPassword"
-                app:layout_constraintTop_toBottomOf="@+id/newPassword"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/newPassword" />
 
             <Button
                 android:id="@+id/updateButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:background="@drawable/custom_green_bacground_filled"
                 android:text="@string/update_settings"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="@+id/phoneNumber"
                 app:layout_constraintStart_toStartOf="@+id/phoneNumber"
-                app:layout_constraintTop_toBottomOf="@+id/phoneNumber"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/phoneNumber" />
 
             <Button
                 android:id="@+id/logoutButton"
@@ -140,23 +167,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="64dp"
+                android:background="@drawable/custom_green_bacground_filled"
                 android:text="@string/logout"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/updateButton"
                 app:layout_constraintStart_toStartOf="@+id/updateButton"
                 app:layout_constraintTop_toBottomOf="@+id/updateButton"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <TextView
-                android:id="@+id/change_image"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="@string/change_user_image"
-                android:textColor="@android:color/holo_blue_dark"
-                app:layout_constraintEnd_toEndOf="@+id/profile_image"
-                app:layout_constraintStart_toStartOf="@+id/profile_image"
-                app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.36" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

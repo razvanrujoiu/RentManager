@@ -3,14 +3,25 @@ package com.example.urbanmobility.database.Firebase;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
+import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+import com.example.urbanmobility.R;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -63,7 +74,7 @@ public class FirebaseDatabase {
         return user.updatePassword(password);
     }
 
-    public UploadTask updateProfilePhotoIntoStorogage(Bitmap profilePhoto) {
+    public UploadTask updateProfilePhotoIntoStorage(Bitmap profilePhoto) {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         StorageReference storageReference = firebaseStorage.getReference();
         StorageReference profilePhotoForUser = storageReference.child(user.getUid() + "/photo.jpg");
@@ -75,11 +86,12 @@ public class FirebaseDatabase {
 
     public void downloadProfilePhotoFromStorage(ImageView imageView,Context context) {
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        StorageReference storageReference = firebaseStorage.getReference();
-        StorageReference profilePhotoForUser = storageReference.child(user.getUid() + "/photo.jpg");
         try {
+            StorageReference storageReference = firebaseStorage.getReference();
+            StorageReference profilePhotoForUser = storageReference.child(user.getUid() + "/photo.jpg");
             GlideApp.with(context)
                     .load(profilePhotoForUser)
+                    .placeholder(R.drawable.person)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imageView);
         } catch (Exception e) {

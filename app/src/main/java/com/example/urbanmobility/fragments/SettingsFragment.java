@@ -79,7 +79,6 @@ public class SettingsFragment extends Fragment implements LifecycleOwner {
             startActivity(intent);
             getActivity().finish();
         });
-        binding.changeImage.setOnClickListener(updateUserImage());
         binding.profileImage.setOnClickListener(updateUserImage());
         binding.updateButton.setOnClickListener(updateUserSettings());
         FirebaseDatabase.getInstance().downloadProfilePhotoFromStorage(binding.profileImage,getContext());
@@ -127,7 +126,7 @@ public class SettingsFragment extends Fragment implements LifecycleOwner {
     }
 
     private void handleFirebaseUpdate(Bitmap photo) {
-        FirebaseDatabase.getInstance().updateProfilePhotoIntoStorogage(photo)
+        FirebaseDatabase.getInstance().updateProfilePhotoIntoStorage(photo)
                 .addOnFailureListener(e -> {
                     Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
                 })
