@@ -7,7 +7,7 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
     defaultConfig {
-        applicationId "com.example.rentmanager"
+        applicationId "com.example.urbanmobility"
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 1

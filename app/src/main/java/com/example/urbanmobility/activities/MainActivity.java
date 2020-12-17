@@ -10,6 +10,7 @@ import android.os.Bundle;
 import com.example.urbanmobility.R;
 import com.example.urbanmobility.databinding.ActivityMainBinding;
 import com.example.urbanmobility.fragments.HomeFragment;
+import com.example.urbanmobility.fragments.MapsFragment;
 import com.example.urbanmobility.fragments.ResidencesFragment;
 import com.example.urbanmobility.fragments.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.action_routes:
                     selectedFragment = ResidencesFragment.newInstance(getApplication());
+                    break;
+                case R.id.action_location:
+                    selectedFragment = MapsFragment.newInstance();
                     break;
                 case R.id.action_settings:
                     selectedFragment = SettingsFragment.newInstance();
