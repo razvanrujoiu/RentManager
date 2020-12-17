@@ -13,7 +13,7 @@ public class DatabaseClient {
 
     private static DatabaseClient instance;
 
-    private RentManagerDatabase rentManagerDatabase;
+    private UrbanMobilityDatabase urbanMobilityDatabase;
 
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor =
@@ -21,7 +21,7 @@ public class DatabaseClient {
 
     private DatabaseClient(Context context) {
         this.context = context;
-        rentManagerDatabase = Room.databaseBuilder(context, RentManagerDatabase.class, "rentmanagerdb").build();
+        urbanMobilityDatabase = Room.databaseBuilder(context, UrbanMobilityDatabase.class, "rentmanagerdb").build();
     }
 
     public static synchronized DatabaseClient getInstance(Context context) {
@@ -31,7 +31,7 @@ public class DatabaseClient {
         return instance;
     }
 
-    public RentManagerDatabase getRentManagerDatabase() {
-        return rentManagerDatabase;
+    public UrbanMobilityDatabase getUrbanMobilityDatabase() {
+        return urbanMobilityDatabase;
     }
 }

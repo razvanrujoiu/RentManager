@@ -103,7 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
             registeredUser.setEmailAddress(strings[0]);
             registeredUser.setUserPassword(Utility.hashPassword(strings[1]));
             Long databaseUserId = DatabaseClient.getInstance(getApplicationContext())
-                    .getRentManagerDatabase()
+                    .getUrbanMobilityDatabase()
                     .userDao()
                     .insertUser(registeredUser);
             Utility.storeUserIdToSharedPreferences(getApplicationContext(),databaseUserId);

@@ -14,35 +14,35 @@ import java.util.List;
 public class ResidenceViewModel extends AndroidViewModel {
 
     private RouteRepository routeRepository;
-    private final LiveData<List<Route>> allResidences;
+    private final LiveData<List<Route>> allRoutes;
 
     public ResidenceViewModel(@NonNull Application application) {
         super(application);
         routeRepository = new RouteRepository(application);
-        allResidences = routeRepository.getAllResidences();
+        allRoutes = routeRepository.getAllRoutes();
     }
 
-    public LiveData<List<Route>> getAllResidences() {
-        return allResidences;
+    public LiveData<List<Route>> getAllRoutes() {
+        return allRoutes;
     }
 
     public LiveData<Route> getResidenceById(long residenceId) {
         return routeRepository.getResidenceById(residenceId);
     }
 
-    public Long insertResidence(Route route) {
+    public Long insertRoute(Route route) {
         return routeRepository.insert(route);
     }
 
-    public void updateResidence(Route route) {
-        routeRepository.updateResidence(route);
+    public void updateRoute(Route route) {
+        routeRepository.updateRoute(route);
     }
 
-    public void deleteResidence(Route route) {
-        routeRepository.deleteResidence(route);
+    public void deleteRoute(Route route) {
+        routeRepository.deleteRoute(route);
     }
 
-    public void deleteAllResidences() {
-        routeRepository.deleteAllResidences();
+    public void deleteAllRoutes() {
+        routeRepository.deleteAllRoutes();
     }
 }

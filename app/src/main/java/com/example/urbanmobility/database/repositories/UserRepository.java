@@ -18,7 +18,7 @@ public class UserRepository {
     UserRepository(Application application) {
         userDao = DatabaseClient
                 .getInstance(application.getApplicationContext())
-                .getRentManagerDatabase()
+                .getUrbanMobilityDatabase()
                 .userDao();
         SharedPreferences sharedPreferences = application.getSharedPreferences("user", Context.MODE_PRIVATE);
         long userId = sharedPreferences.getLong("userId",0);

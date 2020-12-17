@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.example.urbanmobility.database.DatabaseClient;
-import com.example.urbanmobility.database.dao.StationDao;
+import com.example.urbanmobility.database.dao.RouteDao;
 import com.example.urbanmobility.models.Route;
 import com.example.urbanmobility.models.Station;
 
@@ -14,29 +14,29 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class RouteRepository {
 
-    private StationDao stationDao;
-    private LiveData<List<Route>> allResidences;
+    private RouteDao routeDao;
+    private LiveData<List<Route>> allRoutes;
     private StationRepository stationRepository;
 
     public RouteRepository(Application application) {
-         stationDao = DatabaseClient
+         routeDao = DatabaseClient
                  .getInstance(application.getApplicationContext())
-                 .getRentManagerDatabase()
-                 .residenceDao();
+                 .getUrbanMobilityDatabase()
+                 .routeDao();
          stationRepository = new StationRepository(application);
-         allResidences = stationDao.getAllResidences();
+         allRoutes = routeDao.getAllRoutes();
     }
 
-    public LiveData<List<Route>> getAllResidences() {
-        return allResidences;
+    public LiveData<List<Route>> getAllRoutes() {
+        return allRoutes;
     }
 
     public LiveData<Route> getResidenceByUserId(long userId) {
-        return stationDao.getResidenceByUserId(userId);
+        return routeDao.getRouteByUserId(userId);
     }
 
     public LiveData<Route> getResidenceById(long residenceId) {
-        return stationDao.getResidenceById(residenceId);
+        return routeDao.getRouteById(residenceId);
     }
 
 
@@ -44,7 +44,7 @@ public class RouteRepository {
     public Long insert(Route route) {
         AtomicLong residenceId = new AtomicLong();
         DatabaseClient.databaseWriteExecutor.execute(() -> {
-            residenceId.set(stationDao.insert(route));
+            residenceId.set(routeDao.insert(route));
             Station station = route.getStationList().get(0);
             station.setRouteIdForeignKey(residenceId.get());
             stationRepository.insert(station);
@@ -52,21 +52,21 @@ public class RouteRepository {
         return residenceId.get();
     }
 
-    public void updateResidence(Route route) {
+    public void updateRoute(Route route) {
         DatabaseClient.databaseWriteExecutor.execute(() -> {
-            stationDao.update(route);
+            routeDao.update(route);
         });
     }
 
-    public void deleteResidence(Route route) {
+    public void deleteRoute(Route route) {
         DatabaseClient.databaseWriteExecutor.execute(() -> {
-            stationDao.delete(route);
+            routeDao.delete(route);
         });
     }
 
-    public void deleteAllResidences() {
+    public void deleteAllRoutes() {
         DatabaseClient.databaseWriteExecutor.execute(() -> {
-            stationDao.deleteAllResidences();
+            routeDao.deleteAllRoutes();
         });
     }
 }

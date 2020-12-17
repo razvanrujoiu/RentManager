@@ -11,11 +11,11 @@ import com.example.urbanmobility.models.Route;
 import com.example.urbanmobility.models.User;
 
 @Database(entities = {Station.class, Route.class, User.class}, version = 1, exportSchema = false)
-public abstract class RentManagerDatabase extends RoomDatabase {
+public abstract class UrbanMobilityDatabase extends RoomDatabase {
 
-    public abstract RouteDao addressDao();
+    public abstract StationDao stationDao();
 
-    public abstract StationDao residenceDao();
+    public abstract RouteDao routeDao();
 
     public abstract UserDao userDao();
 }

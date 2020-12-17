@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.example.urbanmobility.database.DatabaseClient;
-import com.example.urbanmobility.database.dao.RouteDao;
+import com.example.urbanmobility.database.dao.StationDao;
 import com.example.urbanmobility.models.Station;
 
 import java.util.List;
@@ -13,36 +13,36 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class StationRepository {
 
-    private RouteDao routeDao;
-    private LiveData<List<Station>> allAddresses;
+    private StationDao stationDao;
+    private LiveData<List<Station>> allStations;
 
     StationRepository(Application application) {
-        routeDao = DatabaseClient
+        stationDao = DatabaseClient
                 .getInstance(application.getApplicationContext())
-                .getRentManagerDatabase()
-                .addressDao();
-        allAddresses = routeDao.getAllAddresses();
+                .getUrbanMobilityDatabase()
+                .stationDao();
+        allStations = stationDao.getAllStations();
     }
 
-    LiveData<List<Station>> getAllAddresses() {
-        return allAddresses;
+    LiveData<List<Station>> getAllStations() {
+        return allStations;
     }
 
     LiveData<Station> getAddressByResidenceId(long residenceId) {
-        return routeDao.getAddressByResidenceId(residenceId);
+        return stationDao.getStationsByRouteId(residenceId);
     }
 
     Long insert(Station station) {
         AtomicLong addressId = new AtomicLong();
         DatabaseClient.databaseWriteExecutor.execute(() -> {
-            addressId.set(routeDao.insert(station));
+            addressId.set(stationDao.insert(station));
         });
         return  addressId.get();
     }
 
     void deleteAddress(Station station) {
         DatabaseClient.databaseWriteExecutor.execute(() -> {
-            routeDao.delete(station);
+            stationDao.delete(station);
         });
     }
 

@@ -63,7 +63,7 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
         super.onCreate(savedInstanceState);
         residenceViewModel = new ResidenceViewModel(application);
 
-        residenceViewModel.getAllResidences().observe(this, residences -> {
+        residenceViewModel.getAllRoutes().observe(this, residences -> {
             this.routes.clear();
             this.routes.addAll(residences);
             setRecyclerViewAdapter();
@@ -97,12 +97,12 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
             if(routes != null) {
                 routes.clear();
                 adapter.notifyDataSetChanged();
-                residenceViewModel.deleteAllResidences();
+                residenceViewModel.deleteAllRoutes();
             }
         });
 
         compositeDisposable.add(ResidenceAdapter.removeResidencePublisher.subscribe(residence ->
-                residenceViewModel.deleteResidence(residence)
+                residenceViewModel.deleteRoute(residence)
         ));
 
         return view;
@@ -134,7 +134,7 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
                         long userId = sharedPreferences.getLong("userId", 0);
                         for (Route route : response.body().getRoutes()) {
                             route.setUserIdForeignKey(userId);
-                            residenceViewModel.insertResidence(route);
+                            residenceViewModel.insertRoute(route);
                         }
                         binding.progressBar.setVisibility(View.INVISIBLE);
 //                        setRecyclerViewAdapter();

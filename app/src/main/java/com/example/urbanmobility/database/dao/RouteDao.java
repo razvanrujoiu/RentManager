@@ -4,17 +4,22 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 
-import com.example.urbanmobility.models.Station;
+import com.example.urbanmobility.models.Route;
 
 import java.util.List;
 
 @Dao
-public interface RouteDao extends BaseDao<Station> {
+public interface RouteDao extends BaseDao<Route> {
 
-    @Query("SELECT * FROM Station")
-    LiveData<List<Station>> getAllAddresses();
+    @Query("SELECT * FROM Route")
+    LiveData<List<Route>> getAllRoutes();
 
-    @Query("SELECT * FROM Station WHERE routeIdForeignKey = :id")
-    LiveData<Station> getAddressByResidenceId(Long id);
+    @Query("SELECT * FROM Route WHERE userIdForeignKey = :userId")
+    LiveData<Route> getRouteByUserId(Long userId);
 
+    @Query("SELECT * FROM Route WHERE routeId = :routeId")
+    LiveData<Route> getRouteById(Long routeId);
+
+    @Query("DELETE FROM Route")
+    void deleteAllRoutes();
 }
