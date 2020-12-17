@@ -5,15 +5,15 @@
         android:id="@+id/action_home"
         android:enabled="true"
         android:title="@string/home"
-        android:icon="@drawable/ic_baseline_format_list_bulleted_24"
+        android:icon="@drawable/ic_baseline_home"
         android:contentDescription="@string/home"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_residence"
         android:enabled="true"
-        android:title="@string/residences"
-        android:icon="@drawable/ic_baseline_home"
-        android:contentDescription="@string/residences"
+        android:title="@string/routes"
+        android:icon="@drawable/ic_baseline_alt_route_24"
+        android:contentDescription="@string/routes"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_settings"

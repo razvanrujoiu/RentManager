@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RentManager</string>
+    <string name="app_name">UrbanMobility</string>
     <string name="welcome_back_message">Hey! Glad to have you back!</string>
     <string name="user_mail">E-mail</string>
     <string name="password">Password</string>
@@ -47,4 +47,5 @@
     <string name="get_data_from_api">Get data from API</string>
     <string name="clear_all">Clear all</string>
     <string name="add_residence">Add residence</string>
+    <string name="routes">Routes</string>
 </resources>
