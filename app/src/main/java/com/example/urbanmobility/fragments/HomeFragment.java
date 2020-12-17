@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        binding.btnAddResidence.setOnClickListener(v -> {
+        binding.btnAddRoute.setOnClickListener(v -> {
             Intent addAddressActivityIntent = new Intent(getContext(), AddResidenceActivity.class);
             startActivity(addAddressActivityIntent);
         });

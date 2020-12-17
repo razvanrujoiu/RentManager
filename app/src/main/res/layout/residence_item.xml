@@ -9,26 +9,25 @@
     android:layout_marginTop="12dp"
     android:layout_marginEnd="12dp"
     android:layout_marginBottom="12dp"
+    android:backgroundTint="@color/greenBG"
     android:elevation="5dp"
     android:fadingEdgeLength="2dp"
-    app:cardCornerRadius="10dp"
+    app:cardCornerRadius="48dp"
     app:cardElevation="3dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/lightGray">
+        android:background="@color/greenBG">
 
 
         <TextView
             android:id="@+id/residenceDetails"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="#FFFFFF"
-            android:paddingStart="12dp"
-            android:paddingTop="12dp"
-            android:paddingEnd="12dp"
-            android:paddingBottom="12dp"
+            android:background="@color/greenBG"
+            android:padding="18dp"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -42,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
+            android:tint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_cancel_24" />

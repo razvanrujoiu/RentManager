@@ -7,4 +7,6 @@
     <color name="lightGray">#ACACAC</color>
     <color name="toolbarGray">#717070</color>>
     <color name="greenBG">#FF99CC00</color>
+    <color name="lighterGreenBG">#ABCF3F</color>
+    <color name="lightestGreenBG">#C9DF86</color>
 </resources>

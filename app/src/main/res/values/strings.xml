@@ -44,10 +44,15 @@
     <string name="change_user_image">Change user image</string>
     <string name="upload_successful">Profile photo successfully uploaded</string>
     <string name="add_address">Add address</string>
-    <string name="get_data_from_api">Get data from API</string>
-    <string name="clear_all">Clear all</string>
+    <string name="get_routes">Get routes</string>
+    <string name="clear_routes">Clear routes</string>
     <string name="add_residence">Add residence</string>
     <string name="routes">Routes</string>
     <string name="location">Location</string>
     <string name="notifications">Notifications</string>
+    <string name="app_title">Urban
+        Mobility</string>
+    <string name="ride_safe_ride_smart">Ride safe.
+        Ride smart.</string>
+
 </resources>
