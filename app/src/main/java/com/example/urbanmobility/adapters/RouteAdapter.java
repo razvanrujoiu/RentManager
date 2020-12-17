@@ -3,27 +3,23 @@ package com.example.urbanmobility.adapters;
 import android.content.Context;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 
 import com.example.urbanmobility.databinding.RouteItemBinding;
 import com.example.urbanmobility.databinding.StationItemBinding;
-import com.example.urbanmobility.models.MockRoute;
-import com.example.urbanmobility.models.MockStation;
+import com.example.urbanmobility.models.Route;
+import com.example.urbanmobility.models.Station;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
-import okhttp3.Route;
 
 
 public class RouteAdapter extends BaseExpandableListAdapter {
     private Context context;
-    private ArrayList<MockRoute> routes;
+    private ArrayList<Route> routes;
 
-    public RouteAdapter(Context context, ArrayList<MockRoute> routes) {
+    public RouteAdapter(Context context, ArrayList<Route> routes) {
         this.context = context;
         this.routes = routes;
     }
@@ -35,7 +31,7 @@ public class RouteAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int i) {
-        return routes.get(i).getStations().size();
+        return routes.get(i).getStationList().size();
     }
 
     @Override
@@ -45,7 +41,7 @@ public class RouteAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int i, int i1) {
-        return routes.get(i).getStations().get(i1);
+        return routes.get(i).getStationList().get(i1);
     }
 
     @Override
@@ -65,23 +61,23 @@ public class RouteAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
-        MockRoute route = routes.get(i);
+        Route route = routes.get(i);
         LayoutInflater inflater = LayoutInflater.from(context);
         RouteItemBinding routeItemBinding = RouteItemBinding.inflate(inflater,viewGroup,false);
-        routeItemBinding.routeNoTV.setText(Integer.toString(route.getRouteNo()));
-        routeItemBinding.estimatedTimeTV.setText(Integer.toString(route.getEstimatedRouteTime()));
-        routeItemBinding.stationsNumberTV.setText(Integer.toString(route.getStationsNo()));
+        routeItemBinding.routeNoTV.setText(route.getRouteNo());
+        routeItemBinding.estimatedTimeTV.setText(route.getEstimatedTime());
+        routeItemBinding.stationsNumberTV.setText(String.valueOf(route.getStationList().size()));
 
         return routeItemBinding.getRoot();
     }
 
     @Override
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
-        MockStation station = routes.get(i).getStations().get(i1);
+        Station station = routes.get(i).getStationList().get(i1);
         LayoutInflater inflater = LayoutInflater.from(context);
         StationItemBinding stationItemBinding = StationItemBinding.inflate(inflater,viewGroup,false);
         stationItemBinding.streetNameTV.setText(station.getStreetName());
-        stationItemBinding.stationNameTV.setText(station.getName());
+        stationItemBinding.stationNameTV.setText(station.getStationName());
         stationItemBinding.arrivalHourTV.setText(station.getArrivalHour());
         stationItemBinding.departureHourTV.setText(station.getDepartureHour());
         return stationItemBinding.getRoot();

@@ -5,31 +5,30 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.example.urbanmobility.databinding.ActivityAddAddressBinding;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.urbanmobility.R;
+import com.example.urbanmobility.databinding.ActivityAddStationsBinding;
 import com.example.urbanmobility.models.Route;
-import com.example.urbanmobility.models.Station;
-import com.example.urbanmobility.viewmodels.ResidenceViewModel;
+import com.example.urbanmobility.viewmodels.RouteViewModel;
 
 public class AddStationActivity extends AppCompatActivity {
 
-    ActivityAddAddressBinding binding;
+    ActivityAddStationsBinding binding;
     Route routeFromIntent;
-    ResidenceViewModel residenceViewModel;
+    RouteViewModel routeViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAddAddressBinding.inflate(getLayoutInflater());
+        binding = ActivityAddStationsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         binding.addAddressBtn.setOnClickListener(view -> saveAddress());
 
         routeFromIntent = (Route) getIntent().getSerializableExtra("residence");
-        residenceViewModel = new ResidenceViewModel(getApplication());
+        routeViewModel = new RouteViewModel(getApplication());
     }
 
     private void saveAddress() {

@@ -7,7 +7,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,14 +17,12 @@ import android.widget.Toast;
 import com.example.urbanmobility.Utils.InternetConnection;
 import com.example.urbanmobility.adapters.RouteAdapter;
 import com.example.urbanmobility.databinding.FragmentRoutesBinding;
-import com.example.urbanmobility.http.ResidenceService;
 import com.example.urbanmobility.http.RetrofitClient;
-import com.example.urbanmobility.models.MockRoute;
-import com.example.urbanmobility.models.MockStation;
-import com.example.urbanmobility.models.Residence;
+import com.example.urbanmobility.http.RouteService;
 import com.example.urbanmobility.models.Route;
 import com.example.urbanmobility.models.ResidenceList;
-import com.example.urbanmobility.viewmodels.ResidenceViewModel;
+import com.example.urbanmobility.models.Station;
+import com.example.urbanmobility.viewmodels.RouteViewModel;
 
 import java.util.ArrayList;
 
@@ -47,7 +44,7 @@ public class RoutesFragment extends Fragment implements View.OnClickListener {
     private static Application application;
     private ArrayList<Route> routes = new ArrayList<>();
     private LinearLayoutManager layoutManager;
-    private ResidenceViewModel residenceViewModel;
+    private RouteViewModel routeViewModel;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 
@@ -65,13 +62,34 @@ public class RoutesFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        residenceViewModel = new ResidenceViewModel(application);
+        routeViewModel = new RouteViewModel(application);
 
-        residenceViewModel.getAllRoutes().observe(this, residences -> {
-            this.routes.clear();
-            this.routes.addAll(residences);
-            setRecyclerViewAdapter();
-        });
+//        routeViewModel.getAllRoutes().observe(this, residences -> {
+//            this.routes.clear();
+//            this.routes.addAll(residences);
+//            setRecyclerViewAdapter();
+//        });
+
+        Station mockStation = new Station("Bd Expozitiei","Orlando","21:00","14:00");
+        Station mockStation1 = new Station("Calea Victoriei","Banu Manta","22:00","14:00");
+        Station mockStation2 = new Station("Calea Grivitei","Aviator Popisteanu","12:00","14:00");
+        Station mockStation3 = new Station("Ion Mihalache","Chibrit","13:00","14:00");
+        ArrayList<Station> stations = new ArrayList<>();
+        stations.add(mockStation);
+        stations.add(mockStation1);
+        stations.add(mockStation2);
+        stations.add(mockStation3);
+        Route mockRoute = new Route("1h45m", "335N", 0L);
+        Route mockRoute1 = new Route("1h22m", "56", 0L);
+        Route mockRoute2 = new Route("45m", "120", 0L);
+        mockRoute.setStationList(stations);
+        mockRoute1.setStationList(stations);
+        mockRoute2.setStationList(stations);
+        ArrayList<Route> routes = new ArrayList<>();
+        this.routes.add(mockRoute);
+        this.routes.add(mockRoute1);
+        this.routes.add(mockRoute2);
+
     }
 
     @Override
@@ -86,7 +104,7 @@ public class RoutesFragment extends Fragment implements View.OnClickListener {
 
         layoutManager = new LinearLayoutManager(getContext());
 
-        setRecyclerViewAdapter();
+        setExpandableListViewAdapter();
 
         binding.btnGetResidencesFromApi.setOnClickListener(v -> {
             if (routes != null) {
@@ -101,36 +119,21 @@ public class RoutesFragment extends Fragment implements View.OnClickListener {
             if(routes != null) {
                 routes.clear();
                 adapter.notifyDataSetChanged();
-                residenceViewModel.deleteAllRoutes();
+                routeViewModel.deleteAllRoutes();
             }
         });
 
-        compositeDisposable.add(ResidenceAdapter.removeResidencePublisher.subscribe(residence ->
-                residenceViewModel.deleteRoute(residence)
-        ));
+//        compositeDisposable.add(RouteAdapter.removeResidencePublisher.subscribe(residence ->
+//                residenceViewModel.deleteRoute(residence)
+//        ));
 
         return view;
     }
 
 
-    private void setRecyclerViewAdapter() {
-        MockStation mockStation = new MockStation("dasda","asdasd","dasda","asdasd");
-        MockStation mockStation1 = new MockStation("dasda","asdasd","dasda","asdasd");
-        MockStation mockStation2 = new MockStation("dasda","asdasd","dasda","asdasd");
-        MockStation mockStation3 = new MockStation("dasda","asdasd","dasda","asdasd");
-        ArrayList<MockStation> stations = new ArrayList<>();
-        stations.add(mockStation);
-        stations.add(mockStation1);
-        stations.add(mockStation2);
-        stations.add(mockStation3);
-        MockRoute mockRoute = new MockRoute(4,34,31,stations);
-        MockRoute mockRoute1 = new MockRoute(4,34,31,stations);
-        MockRoute mockRoute2 = new MockRoute(4,34,31,stations);
-        ArrayList<MockRoute> routes = new ArrayList<>();
-        routes.add(mockRoute);
-        routes.add(mockRoute1);
-        routes.add(mockRoute2);
-        adapter = new RouteAdapter(getContext(),routes);
+    private void setExpandableListViewAdapter() {
+
+        adapter = new RouteAdapter(getContext(), routes);
         expandableListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -153,7 +156,7 @@ public class RoutesFragment extends Fragment implements View.OnClickListener {
                         long userId = sharedPreferences.getLong("userId", 0);
                         for (Route route : response.body().getRoutes()) {
                             route.setUserIdForeignKey(userId);
-                            residenceViewModel.insertRoute(route);
+                            routeViewModel.insertRoute(route);
                         }
                         binding.progressBar.setVisibility(View.INVISIBLE);
 //                        setRecyclerViewAdapter();

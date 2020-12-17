@@ -11,12 +11,12 @@ import com.example.urbanmobility.models.Route;
 
 import java.util.List;
 
-public class ResidenceViewModel extends AndroidViewModel {
+public class RouteViewModel extends AndroidViewModel {
 
     private RouteRepository routeRepository;
     private final LiveData<List<Route>> allRoutes;
 
-    public ResidenceViewModel(@NonNull Application application) {
+    public RouteViewModel(@NonNull Application application) {
         super(application);
         routeRepository = new RouteRepository(application);
         allRoutes = routeRepository.getAllRoutes();

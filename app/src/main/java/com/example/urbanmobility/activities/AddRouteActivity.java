@@ -11,7 +11,7 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.example.urbanmobility.R;
-import com.example.urbanmobility.databinding.ActivityAddResidenceBinding;
+import com.example.urbanmobility.databinding.ActivityAddRouteBinding;
 import com.example.urbanmobility.models.Route;
 
 import java.text.SimpleDateFormat;
@@ -20,7 +20,7 @@ import java.util.Locale;
 
 public class AddRouteActivity extends AppCompatActivity {
 
-    ActivityAddResidenceBinding binding;
+    ActivityAddRouteBinding binding;
     private int squareFeetSeekBarValue = 0;
     final Calendar calendar = Calendar.getInstance();
     int LAUNCH_ADD_ADDRESS_ACTIVITY = 1;
@@ -28,7 +28,7 @@ public class AddRouteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAddResidenceBinding.inflate(getLayoutInflater());
+        binding = ActivityAddRouteBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         binding.addResidence.setOnClickListener(view -> saveResidence());
