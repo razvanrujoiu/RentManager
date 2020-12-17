@@ -12,13 +12,13 @@ import android.widget.Toast;
 
 import com.example.urbanmobility.R;
 import com.example.urbanmobility.databinding.ActivityAddResidenceBinding;
-import com.example.urbanmobility.models.Residence;
+import com.example.urbanmobility.models.Route;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class AddResidenceActivity extends AppCompatActivity {
+public class AddRouteActivity extends AppCompatActivity {
 
     ActivityAddResidenceBinding binding;
     private int squareFeetSeekBarValue = 0;
@@ -46,7 +46,7 @@ public class AddResidenceActivity extends AppCompatActivity {
             updateDatePickerEditText();
         };
         binding.endRentalDate.setOnClickListener(v -> {
-            new DatePickerDialog(AddResidenceActivity.this,
+            new DatePickerDialog(AddRouteActivity.this,
                     dateSetListener,
                     calendar.get(Calendar.YEAR),
                     calendar.get(Calendar.MONTH),
@@ -124,17 +124,17 @@ public class AddResidenceActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("user", MODE_PRIVATE);
         Long userIdForeignKey = sharedPreferences.getLong("userId", 0);
 
-        Residence residence = new Residence(Integer.parseInt(numberOfRooms),
-                isDetached,
-                squareFeetSeekBarValue,
-                hasBalcony,
-                Double.parseDouble(constructionYear),
-                Double.parseDouble(rentalPrice),
-                endRentalDate,
-                userIdForeignKey);
-        Intent addAddressIntent = new Intent(getApplicationContext(), AddAddressActivity.class);
-        addAddressIntent.putExtra("residence", residence);
-        startActivityForResult(addAddressIntent, LAUNCH_ADD_ADDRESS_ACTIVITY);
+//        Route route = new Route(Integer.parseInt(numberOfRooms),
+//                isDetached,
+//                squareFeetSeekBarValue,
+//                hasBalcony,
+//                Double.parseDouble(constructionYear),
+//                Double.parseDouble(rentalPrice),
+//                endRentalDate,
+//                userIdForeignKey);
+//        Intent addAddressIntent = new Intent(getApplicationContext(), AddStationActivity.class);
+//        addAddressIntent.putExtra("residence", route);
+//        startActivityForResult(addAddressIntent, LAUNCH_ADD_ADDRESS_ACTIVITY);
     }
 
     @Override

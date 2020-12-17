@@ -94,7 +94,7 @@ public class SettingsFragment extends Fragment implements LifecycleOwner {
         @Override
         protected Void doInBackground(Long... longs) {
             loggedInUser = DatabaseClient.getInstance(getContext())
-                    .getRentManagerDatabase()
+                    .getUrbanMobilityDatabase()
                     .userDao()
                     .getUserById(longs[0]);
             return null;
@@ -112,7 +112,7 @@ public class SettingsFragment extends Fragment implements LifecycleOwner {
         @Override
         protected Void doInBackground(Void... voids) {
             DatabaseClient.getInstance(getContext())
-                    .getRentManagerDatabase()
+                    .getUrbanMobilityDatabase()
                     .userDao()
                     .updateUser(loggedInUser);
             return null;

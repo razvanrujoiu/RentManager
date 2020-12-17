@@ -45,9 +45,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.AddResidenceActivity" />
+        <activity android:name=".activities.AddRouteActivity" />
         <activity
-            android:name=".activities.AddAddressActivity"
+            android:name=".activities.AddStationActivity"
             android:label="@string/title_activity_add_address"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.MainActivity" />

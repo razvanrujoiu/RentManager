@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void navigateToAddAddressActivity() {
-        Intent addAddressActivityIntent = new Intent(this, AddAddressActivity.class);
+        Intent addAddressActivityIntent = new Intent(this, AddStationActivity.class);
         startActivity(addAddressActivityIntent);
     }
 }

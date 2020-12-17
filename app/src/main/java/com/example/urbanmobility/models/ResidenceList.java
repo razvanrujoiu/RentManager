@@ -9,13 +9,13 @@ public class ResidenceList {
 
     @SerializedName("residences")
     @Expose
-    private ArrayList<Residence> residences = null;
+    private ArrayList<Route> routes = null;
 
-    public ArrayList<Residence> getResidences() {
-        return residences;
+    public ArrayList<Route> getRoutes() {
+        return routes;
     }
 
-    public void setResidences(ArrayList<Residence> residences) {
-        this.residences = residences;
+    public void setRoutes(ArrayList<Route> routes) {
+        this.routes = routes;
     }
 }

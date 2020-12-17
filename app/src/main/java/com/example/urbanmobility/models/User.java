@@ -22,7 +22,7 @@ public class User {
     private String emailAddress;
 
     @Embedded
-    private ArrayList<Residence> residences;
+    private ArrayList<Route> routes;
 
     @Ignore
     public User() {
@@ -79,11 +79,11 @@ public class User {
         this.emailAddress = emailAddress;
     }
 
-    public ArrayList<Residence> getResidences() {
-        return residences;
+    public ArrayList<Route> getRoutes() {
+        return routes;
     }
 
-    public void setResidences(ArrayList<Residence> residences) {
-        this.residences = residences;
+    public void setRoutes(ArrayList<Route> routes) {
+        this.routes = routes;
     }
 }

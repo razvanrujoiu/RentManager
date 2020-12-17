@@ -16,8 +16,8 @@ public class RetrofitClient {
                 .build();
     }
 
-    public static ResidenceService getResidenceService() {
-        return getRetrofitInstance(BASE_URL).create(ResidenceService.class);
+    public static RouteService getResidenceService() {
+        return getRetrofitInstance(BASE_URL).create(RouteService.class);
     }
 
     public static NotificationService getNotificationService() {

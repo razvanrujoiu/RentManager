@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(String... strings) {
             User databaseResult = DatabaseClient.getInstance(getApplicationContext())
-                    .getRentManagerDatabase()
+                    .getUrbanMobilityDatabase()
                     .userDao()
                     .getUserByMail(strings[0]);
             if (databaseResult == null) {
@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                 user.setEmailAddress(strings[0]);
                 user.setUserPassword(Utility.hashPassword(strings[1]));
                 long userId = DatabaseClient.getInstance(getApplicationContext())
-                        .getRentManagerDatabase()
+                        .getUrbanMobilityDatabase()
                         .userDao()
                         .insertUser(user);
                 Utility.storeUserIdToSharedPreferences(getApplicationContext(), userId);
