@@ -17,11 +17,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.urbanmobility.R;
 import com.example.urbanmobility.Utils.Utility;
 import com.example.urbanmobility.activities.LoginActivity;
 import com.example.urbanmobility.database.DatabaseClient;
 import com.example.urbanmobility.database.Firebase.FirebaseDatabase;
+import com.example.urbanmobility.database.Firebase.GlideApp;
 import com.example.urbanmobility.databinding.FragmentSettingsBinding;
 import com.example.urbanmobility.models.User;
 
@@ -125,32 +127,32 @@ public class SettingsFragment extends Fragment implements LifecycleOwner {
         };
     }
 
-    private void handleFirebaseUpdate(Bitmap photo) {
+    private void handleFirebaseUpdate(Bitmap photo,Context context) {
         FirebaseDatabase.getInstance().updateProfilePhotoIntoStorage(photo)
                 .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+ //                   Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
                 })
                 .addOnSuccessListener(taskSnapshot -> {
-                    Toast.makeText(getContext(),getString(R.string.upload_successful),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(context,getString(R.string.upload_successful),Toast.LENGTH_LONG).show();
                 });
     }
 
     @Override
     public void onActivityResult(int reqCode, int resultCode, Intent data) {
-        super.onActivityResult(reqCode, resultCode, data);
-
-
         if (resultCode == RESULT_OK) {
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContext().getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                binding.profileImage.setImageBitmap(selectedImage);
-                handleFirebaseUpdate(selectedImage);
+                GlideApp.with(getContext())
+                        .load(selectedImage)
+                        .placeholder(R.drawable.person)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(binding.profileImage);
+                handleFirebaseUpdate(selectedImage,getContext());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
