@@ -42,7 +42,7 @@ public class ResidencesFragment extends Fragment implements View.OnClickListener
     private FragmentResidencesBinding binding;
     private static Application application;
     private ArrayList<Residence> residences = new ArrayList<>();
-    LinearLayoutManager layoutManager;
+    private LinearLayoutManager layoutManager;
     private ResidenceViewModel residenceViewModel;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
