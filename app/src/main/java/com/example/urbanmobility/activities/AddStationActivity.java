@@ -15,6 +15,7 @@ import com.example.urbanmobility.R;
 import com.example.urbanmobility.adapters.StationAdapter;
 import com.example.urbanmobility.databinding.ActivityAddStationsBinding;
 import com.example.urbanmobility.models.Route;
+import com.example.urbanmobility.models.RouteWithStations;
 import com.example.urbanmobility.models.Station;
 import com.example.urbanmobility.viewmodels.RouteViewModel;
 
@@ -82,8 +83,8 @@ public class AddStationActivity extends AppCompatActivity {
 
             @Override
             protected Void doInBackground(Void... voids) {
-                routeFromIntent.setStationList(stations);
-                routeViewModel.insertRoute(routeFromIntent);
+                RouteWithStations routeWithStations = new RouteWithStations(routeFromIntent,stations);
+                routeViewModel.insertRoute(routeWithStations);
                 return null;
             }
 

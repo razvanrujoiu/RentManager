@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.Relation;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -20,7 +21,7 @@ import java.util.List;
         onDelete = ForeignKey.CASCADE))
 public class Route implements Serializable {
 
-    @PrimaryKey (autoGenerate = true)
+    @PrimaryKey(autoGenerate = true)
     private Long routeId;
 
     @SerializedName("estimatedTime")
@@ -32,12 +33,11 @@ public class Route implements Serializable {
     private String routeNo;
 
 
-
     // Very important, must use ArrayList, not List, otherwise compiler will give error
-    @SerializedName("stationList")
-    @Expose
-    @Embedded
-    private ArrayList<Station> stationList;
+//    @SerializedName("stationList")
+//    @Expose
+//    @Embedded
+//    private ArrayList<Station> stationList;
 
     private Long userIdForeignKey;
 
@@ -70,14 +70,14 @@ public class Route implements Serializable {
         this.estimatedTime = estimatedTime;
     }
 
-    public ArrayList<Station> getStationList() {
-        return stationList;
-    }
-
-
-    public void setStationList(ArrayList<Station> stationList) {
-        this.stationList = stationList;
-    }
+//    public ArrayList<Station> getStationList() {
+//        return stationList;
+//    }
+//
+//
+//    public void setStationList(ArrayList<Station> stationList) {
+//        this.stationList = stationList;
+//    }
 
     public Long getUserIdForeignKey() {
         return userIdForeignKey;

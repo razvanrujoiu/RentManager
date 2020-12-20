@@ -8,13 +8,14 @@ import androidx.lifecycle.LiveData;
 
 import com.example.urbanmobility.database.repositories.RouteRepository;
 import com.example.urbanmobility.models.Route;
+import com.example.urbanmobility.models.RouteWithStations;
 
 import java.util.List;
 
 public class RouteViewModel extends AndroidViewModel {
 
     private RouteRepository routeRepository;
-    private final LiveData<List<Route>> allRoutes;
+    private final LiveData<List<RouteWithStations>> allRoutes;
 
     public RouteViewModel(@NonNull Application application) {
         super(application);
@@ -22,23 +23,23 @@ public class RouteViewModel extends AndroidViewModel {
         allRoutes = routeRepository.getAllRoutes();
     }
 
-    public LiveData<List<Route>> getAllRoutes() {
+    public LiveData<List<RouteWithStations>> getAllRoutes() {
         return allRoutes;
     }
 
-    public LiveData<Route> getResidenceById(long residenceId) {
+    public LiveData<RouteWithStations> getResidenceById(long residenceId) {
         return routeRepository.getResidenceById(residenceId);
     }
 
-    public Long insertRoute(Route route) {
+    public Long insertRoute(RouteWithStations route) {
         return routeRepository.insert(route);
     }
 
-    public void updateRoute(Route route) {
+    public void updateRoute(RouteWithStations route) {
         routeRepository.updateRoute(route);
     }
 
-    public void deleteRoute(Route route) {
+    public void deleteRoute(RouteWithStations route) {
         routeRepository.deleteRoute(route);
     }
 

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import com.example.urbanmobility.R;
 import com.example.urbanmobility.Utils.InternetConnection;
 import com.example.urbanmobility.adapters.RouteAdapter;
 import com.example.urbanmobility.databinding.FragmentRoutesBinding;
@@ -21,6 +22,7 @@ import com.example.urbanmobility.http.RetrofitClient;
 import com.example.urbanmobility.http.RouteService;
 import com.example.urbanmobility.models.Route;
 import com.example.urbanmobility.models.ResidenceList;
+import com.example.urbanmobility.models.RouteWithStations;
 import com.example.urbanmobility.models.Station;
 import com.example.urbanmobility.viewmodels.RouteViewModel;
 
@@ -42,7 +44,7 @@ public class RoutesFragment extends Fragment implements View.OnClickListener {
     private RouteAdapter adapter;
     private FragmentRoutesBinding binding;
     private static Application application;
-    private ArrayList<Route> routes = new ArrayList<>();
+    private ArrayList<RouteWithStations> routes = new ArrayList<>();
     private LinearLayoutManager layoutManager;
     private RouteViewModel routeViewModel;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -67,6 +69,7 @@ public class RoutesFragment extends Fragment implements View.OnClickListener {
         routeViewModel.getAllRoutes().observe(this, residences -> {
             this.routes.clear();
             this.routes.addAll(residences);
+            adapter.notifyDataSetChanged();
         });
 
         Station mockStation = new Station("Bd Expozitiei","Orlando","21:00","14:00");
@@ -81,14 +84,10 @@ public class RoutesFragment extends Fragment implements View.OnClickListener {
         Route mockRoute = new Route("1h45m", "335N", 0L);
         Route mockRoute1 = new Route("1h22m", "56", 0L);
         Route mockRoute2 = new Route("45m", "120", 0L);
-        mockRoute.setStationList(stations);
-        mockRoute1.setStationList(stations);
-        mockRoute2.setStationList(stations);
         ArrayList<Route> routes = new ArrayList<>();
-        this.routes.add(mockRoute);
-        this.routes.add(mockRoute1);
-        this.routes.add(mockRoute2);
-
+        this.routes.add(new RouteWithStations(mockRoute,stations));
+        this.routes.add(new RouteWithStations(mockRoute1,stations));
+        this.routes.add(new RouteWithStations(mockRoute2,stations));
     }
 
     @Override
@@ -153,8 +152,8 @@ public class RoutesFragment extends Fragment implements View.OnClickListener {
                     if (response.isSuccessful()) {
                         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
                         long userId = sharedPreferences.getLong("userId", 0);
-                        for (Route route : response.body().getRoutes()) {
-                            route.setUserIdForeignKey(userId);
+                        for (RouteWithStations route : response.body().getRoutes()) {
+                            route.route.setUserIdForeignKey(userId);
                             routeViewModel.insertRoute(route);
                         }
                         binding.progressBar.setVisibility(View.INVISIBLE);

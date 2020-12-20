@@ -10,6 +10,7 @@ import android.widget.BaseExpandableListAdapter;
 import com.example.urbanmobility.databinding.RouteItemBinding;
 import com.example.urbanmobility.databinding.StationItemBinding;
 import com.example.urbanmobility.models.Route;
+import com.example.urbanmobility.models.RouteWithStations;
 import com.example.urbanmobility.models.Station;
 
 import java.util.ArrayList;
@@ -17,9 +18,9 @@ import java.util.ArrayList;
 
 public class RouteAdapter extends BaseExpandableListAdapter {
     private Context context;
-    private ArrayList<Route> routes;
+    private ArrayList<RouteWithStations> routes;
 
-    public RouteAdapter(Context context, ArrayList<Route> routes) {
+    public RouteAdapter(Context context, ArrayList<RouteWithStations> routes) {
         this.context = context;
         this.routes = routes;
     }
@@ -31,7 +32,7 @@ public class RouteAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int i) {
-        return routes.get(i).getStationList().size();
+        return routes.get(i).stations.size();
     }
 
     @Override
@@ -41,7 +42,7 @@ public class RouteAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int i, int i1) {
-        return routes.get(i).getStationList().get(i1);
+        return routes.get(i).stations.get(i1);
     }
 
     @Override
@@ -61,19 +62,19 @@ public class RouteAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
-        Route route = routes.get(i);
+        RouteWithStations route = routes.get(i);
         LayoutInflater inflater = LayoutInflater.from(context);
         RouteItemBinding routeItemBinding = RouteItemBinding.inflate(inflater,viewGroup,false);
-        routeItemBinding.routeNoTV.setText(route.getRouteNo());
-        routeItemBinding.estimatedTimeTV.setText(route.getEstimatedTime());
-        routeItemBinding.stationsNumberTV.setText(String.valueOf(route.getStationList().size()));
+        routeItemBinding.routeNoTV.setText(route.route.getRouteNo());
+        routeItemBinding.estimatedTimeTV.setText(route.route.getEstimatedTime());
+        routeItemBinding.stationsNumberTV.setText(String.valueOf(route.stations.size()));
 
         return routeItemBinding.getRoot();
     }
 
     @Override
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
-        Station station = routes.get(i).getStationList().get(i1);
+        Station station = routes.get(i).stations.get(i1);
         LayoutInflater inflater = LayoutInflater.from(context);
         StationItemBinding stationItemBinding = StationItemBinding.inflate(inflater,viewGroup,false);
         stationItemBinding.streetNameTV.setText(station.getStreetName());

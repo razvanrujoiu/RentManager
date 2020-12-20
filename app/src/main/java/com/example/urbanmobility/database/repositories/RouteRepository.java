@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import com.example.urbanmobility.database.DatabaseClient;
 import com.example.urbanmobility.database.dao.RouteDao;
 import com.example.urbanmobility.models.Route;
+import com.example.urbanmobility.models.RouteWithStations;
 import com.example.urbanmobility.models.Station;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class RouteRepository {
 
     private RouteDao routeDao;
-    private LiveData<List<Route>> allRoutes;
+    private LiveData<List<RouteWithStations>> allRoutes;
     private StationRepository stationRepository;
 
     public RouteRepository(Application application) {
@@ -27,40 +28,41 @@ public class RouteRepository {
          allRoutes = routeDao.getAllRoutes();
     }
 
-    public LiveData<List<Route>> getAllRoutes() {
+    public LiveData<List<RouteWithStations>> getAllRoutes() {
         return allRoutes;
     }
 
-    public LiveData<Route> getResidenceByUserId(long userId) {
+    public LiveData<RouteWithStations> getResidenceByUserId(long userId) {
         return routeDao.getRouteByUserId(userId);
     }
 
-    public LiveData<Route> getResidenceById(long residenceId) {
+    public LiveData<RouteWithStations> getResidenceById(long residenceId) {
         return routeDao.getRouteById(residenceId);
     }
 
 
 
-    public Long insert(Route route) {
-        AtomicLong residenceId = new AtomicLong();
+    public Long insert(RouteWithStations route) {
+        AtomicLong routeId = new AtomicLong();
         DatabaseClient.databaseWriteExecutor.execute(() -> {
-            residenceId.set(routeDao.insert(route));
-            Station station = route.getStationList().get(0);
-            station.setRouteIdForeignKey(residenceId.get());
-            stationRepository.insert(station);
+            routeId.set(routeDao.insert(route.route));
+            for(Station station : route.stations) {
+                station.setRouteIdForeignKey(routeId.get());
+                stationRepository.insert(station);
+            }
         });
-        return residenceId.get();
+        return routeId.get();
     }
 
-    public void updateRoute(Route route) {
+    public void updateRoute(RouteWithStations route) {
         DatabaseClient.databaseWriteExecutor.execute(() -> {
-            routeDao.update(route);
+            routeDao.update(route.route);
         });
     }
 
-    public void deleteRoute(Route route) {
+    public void deleteRoute(RouteWithStations route) {
         DatabaseClient.databaseWriteExecutor.execute(() -> {
-            routeDao.delete(route);
+            routeDao.delete(route.route);
         });
     }
 
