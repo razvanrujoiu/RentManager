@@ -7,94 +7,117 @@
     tools:context=".activities.AddStationActivity">
 
     <EditText
-        android:id="@+id/streetName"
+        android:id="@+id/stationName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/custom_green_view_background"
         android:ems="10"
-        android:hint="@string/street_name"
+        android:hint="@string/station_name"
         android:inputType="textPersonName"
+        android:padding="10dp"
         android:textAlignment="center"
+        android:textColor="@color/greenBG"
+        android:textColorHint="@color/greenBG"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.17000002" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/streetNumber"
+        android:id="@+id/streetName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:background="@drawable/custom_green_view_background"
         android:ems="10"
-        android:hint="@string/street_number"
+        android:hint="@string/street_name"
         android:inputType="textPersonName"
+        android:padding="10dp"
         android:textAlignment="center"
+        android:textColor="@color/greenBG"
+        android:textColorHint="@color/greenBG"
+        app:layout_constraintEnd_toEndOf="@+id/stationName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/stationName"
+        app:layout_constraintTop_toBottomOf="@+id/stationName" />
+
+    <EditText
+        android:id="@+id/arrivalTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_green_view_background"
+        android:ems="10"
+        android:hint="@string/arrival_time"
+        android:inputType="time"
+        android:padding="10dp"
+        android:textAlignment="center"
+        android:textColor="@color/greenBG"
+        android:textColorHint="@color/greenBG"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/streetName"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/streetName"
-        app:layout_constraintTop_toBottomOf="@+id/streetName" />
-
-    <EditText
-        android:id="@+id/postalCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="@string/postal_code"
-        android:inputType="number"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/streetNumber"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/streetNumber"
-        app:layout_constraintTop_toBottomOf="@+id/streetNumber"
+        app:layout_constraintTop_toBottomOf="@+id/streetName"
         app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/city"
+        android:id="@+id/departureTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:background="@drawable/custom_green_view_background"
         android:ems="10"
-        android:hint="@string/city"
-        android:inputType="textPersonName"
+        android:hint="@string/departure_time"
+        android:inputType="time"
+        android:padding="10dp"
         android:textAlignment="center"
+        android:textColor="@color/greenBG"
+        android:textColorHint="@color/greenBG"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/postalCode"
+        app:layout_constraintEnd_toEndOf="@+id/arrivalTime"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/postalCode"
-        app:layout_constraintTop_toBottomOf="@+id/postalCode"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/country"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Country"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/city"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/city"
-        app:layout_constraintTop_toBottomOf="@+id/city"
+        app:layout_constraintStart_toStartOf="@+id/arrivalTime"
+        app:layout_constraintTop_toBottomOf="@+id/arrivalTime"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/addAddressBtn"
+        android:id="@+id/addStation"
         android:layout_width="199dp"
         android:layout_height="48dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/add_address"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/custom_green_bacground_filled"
+        android:text="@string/add_station"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/departureTime"
+        app:layout_constraintStart_toStartOf="@+id/departureTime"
+        app:layout_constraintTop_toBottomOf="@+id/departureTime" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/addStations"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addStation" />
+
+    <Button
+        android:id="@+id/addStations"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/custom_green_bacground_filled"
+        android:text="@string/add_stations"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/country"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="@+id/country"
-        app:layout_constraintTop_toBottomOf="@+id/country"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="@+id/addStation"
+        app:layout_constraintStart_toStartOf="@+id/addStation" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

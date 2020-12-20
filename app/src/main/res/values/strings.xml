@@ -16,11 +16,15 @@
     <string name="empty_password_error">Password field must not be empty!</string>
     <string name="register">Register</string>
     <string name="title_activity_add_address">AddAddressActivity</string>
-    <string name="street_name">Street name</string>
+    <string name="station_name">Station Name</string>
+    <string name="street_name">Street Name</string>
     <string name="street_number">Street number</string>
-    <string name="postal_code">Postal code</string>
+    <string name="arrival_time">Arrival time</string>
+    <string name="departure_time">Departure time</string>
     <string name="city">City</string>
     <string name="street_name_required_error">Street name required</string>
+    <string name="station_name_required">Station name required</string>
+    <string name="time">Time required</string>
     <string name="street_number_required_error">Street number required</string>
     <string name="postal_code_required_error">Postal code required</string>
     <string name="city_required_error">City required</string>
@@ -42,7 +46,8 @@
     <string name="settings_updated">User settings were updated!</string>
     <string name="change_user_image">Change user image</string>
     <string name="upload_successful">Profile photo successfully uploaded</string>
-    <string name="add_address">Add station</string>
+    <string name="add_stations">Add stations</string>
+    <string name="add_station">Add station</string>
     <string name="get_routes">Get routes</string>
     <string name="clear_routes">Clear routes</string>
     <string name="add_residence">Add route</string>

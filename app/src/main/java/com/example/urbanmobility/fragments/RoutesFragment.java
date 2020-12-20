@@ -64,11 +64,10 @@ public class RoutesFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         routeViewModel = new RouteViewModel(application);
 
-//        routeViewModel.getAllRoutes().observe(this, residences -> {
-//            this.routes.clear();
-//            this.routes.addAll(residences);
-//            setRecyclerViewAdapter();
-//        });
+        routeViewModel.getAllRoutes().observe(this, residences -> {
+            this.routes.clear();
+            this.routes.addAll(residences);
+        });
 
         Station mockStation = new Station("Bd Expozitiei","Orlando","21:00","14:00");
         Station mockStation1 = new Station("Calea Victoriei","Banu Manta","22:00","14:00");

@@ -31,39 +31,16 @@ public class AddRouteActivity extends AppCompatActivity {
         binding = ActivityAddRouteBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.addResidence.setOnClickListener(view -> saveResidence());
+        binding.addRoute.setOnClickListener(view -> saveResidence());
 
         setSeekBarSquareFeet();
-
-        setDatePickerDialog();
     }
 
-    private void setDatePickerDialog() {
-        DatePickerDialog.OnDateSetListener dateSetListener = (view, year, month, dayOfMonth) -> {
-            calendar.set(Calendar.YEAR, year);
-            calendar.set(Calendar.MONTH, month);
-            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            updateDatePickerEditText();
-        };
-        binding.endRentalDate.setOnClickListener(v -> {
-            new DatePickerDialog(AddRouteActivity.this,
-                    dateSetListener,
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH)).show();
-        });
-    }
 
-    private void updateDatePickerEditText() {
-        String format = "dd-MM-yyyy";
-        SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.US);
-        binding.endRentalDate.setText(dateFormat.format(calendar.getTime()));
-
-    }
 
 
     private void setSeekBarSquareFeet() {
-        binding.seekBarSquareFeet.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        binding.seekBarTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 squareFeetSeekBarValue = i;
@@ -76,65 +53,29 @@ public class AddRouteActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                binding.squareFeetTextView.setText(squareFeetSeekBarValue + "/" + seekBar.getMax());
+                binding.estimatedTimeTextView.setText(squareFeetSeekBarValue + " min");
             }
         });
     }
 
 
     private void saveResidence() {
+        String routeNumber = binding.routeNoTextView.getText().toString().trim();
+        String estimatedTime = binding.estimatedTimeTextView.getText().toString().trim();
 
-        final String numberOfRooms = binding.numberOfRooms.getText().toString().trim();
-        boolean isDetached;
-        if (binding.isDetached.isChecked()) {
-            isDetached = true;
-        } else {
-            isDetached = false;
-        }
-        boolean hasBalcony;
-        if (binding.hasBalcony.isChecked()) {
-            hasBalcony = true;
-        } else {
-            hasBalcony = false;
-        }
-        String constructionYear = binding.constructionYear.getText().toString().trim();
-        String rentalPrice = binding.rentalPrice.getText().toString().trim();
-        String endRentalDate = binding.endRentalDate.getText().toString().trim();
-
-        if (numberOfRooms.isEmpty()) {
-            binding.numberOfRooms.setError(getString(R.string.number_of_rooms_required_error));
-            binding.numberOfRooms.requestFocus();
-        }
-        if (constructionYear.isEmpty()) {
-            binding.constructionYear.setError(getString(R.string.construction_year_required_error));
-            binding.constructionYear.requestFocus();
-            return;
-        }
-        if(rentalPrice.isEmpty()) {
-            binding.rentalPrice.setError(getString(R.string.rental_price_required_error));
-            binding.rentalPrice.requestFocus();
-            return;
-        }
-        if (endRentalDate.isEmpty()) {
-            binding.endRentalDate.setError(getString(R.string.end_rental_date_required));
-            binding.endRentalDate.requestFocus();
+        if (routeNumber.isEmpty()) {
+            binding.routeNoTextView.setError(getString(R.string.end_rental_date_required));
+            binding.routeNoTextView.requestFocus();
             return;
         }
 
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("user", MODE_PRIVATE);
         Long userIdForeignKey = sharedPreferences.getLong("userId", 0);
 
-//        Route route = new Route(Integer.parseInt(numberOfRooms),
-//                isDetached,
-//                squareFeetSeekBarValue,
-//                hasBalcony,
-//                Double.parseDouble(constructionYear),
-//                Double.parseDouble(rentalPrice),
-//                endRentalDate,
-//                userIdForeignKey);
-//        Intent addAddressIntent = new Intent(getApplicationContext(), AddStationActivity.class);
-//        addAddressIntent.putExtra("residence", route);
-//        startActivityForResult(addAddressIntent, LAUNCH_ADD_ADDRESS_ACTIVITY);
+        Route route = new Route(estimatedTime,routeNumber,userIdForeignKey);
+        Intent addAddressIntent = new Intent(getApplicationContext(), AddStationActivity.class);
+        addAddressIntent.putExtra("route", route);
+        startActivityForResult(addAddressIntent, LAUNCH_ADD_ADDRESS_ACTIVITY);
     }
 
     @Override
