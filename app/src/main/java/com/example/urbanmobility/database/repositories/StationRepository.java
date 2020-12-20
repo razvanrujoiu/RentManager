@@ -40,7 +40,7 @@ public class StationRepository {
         return  addressId.get();
     }
 
-    void deleteAddress(Station station) {
+    void deleteStation(Station station) {
         DatabaseClient.databaseWriteExecutor.execute(() -> {
             stationDao.delete(station);
         });

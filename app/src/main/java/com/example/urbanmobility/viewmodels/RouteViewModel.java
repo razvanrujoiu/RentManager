@@ -7,7 +7,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.urbanmobility.database.repositories.RouteRepository;
-import com.example.urbanmobility.models.Route;
 import com.example.urbanmobility.models.RouteWithStations;
 
 import java.util.List;
@@ -27,8 +26,8 @@ public class RouteViewModel extends AndroidViewModel {
         return allRoutes;
     }
 
-    public LiveData<RouteWithStations> getResidenceById(long residenceId) {
-        return routeRepository.getResidenceById(residenceId);
+    public LiveData<RouteWithStations> getRouteFromApi(long residenceId) {
+        return routeRepository.getRouteById(residenceId);
     }
 
     public Long insertRoute(RouteWithStations route) {

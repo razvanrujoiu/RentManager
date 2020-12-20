@@ -48,7 +48,7 @@
         <activity android:name=".activities.AddRouteActivity" />
         <activity
             android:name=".activities.AddStationActivity"
-            android:label="@string/title_activity_add_address"
+            android:label="@string/title_activity_add_station"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.MainActivity" />
     </application>

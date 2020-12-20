@@ -16,7 +16,7 @@ public class RetrofitClient {
                 .build();
     }
 
-    public static RouteService getResidenceService() {
+    public static RouteService getRouteService() {
         return getRetrofitInstance(ROUTES_URL).create(RouteService.class);
     }
 

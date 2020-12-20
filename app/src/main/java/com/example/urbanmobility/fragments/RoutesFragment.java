@@ -103,16 +103,16 @@ public class RoutesFragment extends Fragment implements View.OnClickListener {
 
         setExpandableListViewAdapter();
 
-        binding.btnGetResidencesFromApi.setOnClickListener(v -> {
+        binding.btnGetRoutesFromApi.setOnClickListener(v -> {
             if (routes != null) {
                 routes.clear();
                 adapter.notifyDataSetChanged();
             }
             binding.progressBar.setVisibility(View.VISIBLE);
-            loadResidencesFromApi();
+            loadRoutesFromApi();
         });
 
-        binding.btnDeleteAllResidences.setOnClickListener(v ->{
+        binding.btnDeleteAllRoutes.setOnClickListener(v ->{
             if(routes != null) {
                 routes.clear();
                 adapter.notifyDataSetChanged();
@@ -140,10 +140,10 @@ public class RoutesFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    void loadResidencesFromApi() {
+    void loadRoutesFromApi() {
         if (InternetConnection.checkConnection(getContext())) {
-            RouteService routeService = RetrofitClient.getResidenceService();
-            Call<RouteList> call = routeService.getResidences();
+            RouteService routeService = RetrofitClient.getRouteService();
+            Call<RouteList> call = routeService.getRoutes();
 
             call.enqueue(new Callback<RouteList>() {
                 @Override

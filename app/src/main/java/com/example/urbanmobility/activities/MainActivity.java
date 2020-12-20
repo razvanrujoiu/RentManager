@@ -55,9 +55,4 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.frame_layout, HomeFragment.newInstance());
         transaction.commit();
     }
-
-    private void navigateToAddAddressActivity() {
-        Intent addAddressActivityIntent = new Intent(this, AddStationActivity.class);
-        startActivity(addAddressActivityIntent);
-    }
 }

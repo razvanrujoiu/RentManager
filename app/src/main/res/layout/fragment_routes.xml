@@ -17,7 +17,7 @@
         app:titleMargin="0dp">
 
         <Button
-            android:id="@+id/btnDeleteAllResidences"
+            android:id="@+id/btnDeleteAllRoutes"
             android:layout_width="wrap_content"
             android:layout_height="44dp"
             android:background="@drawable/custom_view_background_filled"
@@ -29,7 +29,7 @@
             tools:layout_editor_absoluteY="5dp" />
 
         <Button
-            android:id="@+id/btnGetResidencesFromApi"
+            android:id="@+id/btnGetRoutesFromApi"
             android:layout_width="wrap_content"
             android:layout_height="44dp"
             android:layout_gravity="end"

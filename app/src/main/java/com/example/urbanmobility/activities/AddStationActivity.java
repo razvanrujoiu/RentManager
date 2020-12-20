@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.LinearLayout;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urbanmobility.R;
 import com.example.urbanmobility.adapters.StationAdapter;
@@ -79,7 +77,7 @@ public class AddStationActivity extends AppCompatActivity {
 
 
     public void saveWholeRoute() {
-        class SaveResidence extends AsyncTask<Void, Void, Void> {
+        class SaveStation extends AsyncTask<Void, Void, Void> {
 
             @Override
             protected Void doInBackground(Void... voids) {
@@ -97,8 +95,8 @@ public class AddStationActivity extends AppCompatActivity {
             }
         }
 
-        SaveResidence saveAddress = new SaveResidence();
-        saveAddress.execute();
+        SaveStation saveStation = new SaveStation();
+        saveStation.execute();
     }
 
 }

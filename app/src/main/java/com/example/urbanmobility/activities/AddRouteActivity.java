@@ -20,7 +20,7 @@ public class AddRouteActivity extends AppCompatActivity {
     ActivityAddRouteBinding binding;
     private int squareFeetSeekBarValue = 0;
     final Calendar calendar = Calendar.getInstance();
-    int LAUNCH_ADD_ADDRESS_ACTIVITY = 1;
+    int LAUNCH_ADD_STATION_ACTIVITY = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class AddRouteActivity extends AppCompatActivity {
         binding = ActivityAddRouteBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.addRoute.setOnClickListener(view -> saveResidence());
+        binding.addRoute.setOnClickListener(view -> saveRoute());
 
         setSeekBarSquareFeet();
     }
@@ -56,7 +56,7 @@ public class AddRouteActivity extends AppCompatActivity {
     }
 
 
-    private void saveResidence() {
+    private void saveRoute() {
         String routeNumber = binding.routeNoTextView.getText().toString().trim();
         String estimatedTime = binding.estimatedTimeTextView.getText().toString().trim();
 
@@ -72,13 +72,13 @@ public class AddRouteActivity extends AppCompatActivity {
         Route route = new Route(estimatedTime,routeNumber,userIdForeignKey);
         Intent addAddressIntent = new Intent(getApplicationContext(), AddStationActivity.class);
         addAddressIntent.putExtra("route", route);
-        startActivityForResult(addAddressIntent, LAUNCH_ADD_ADDRESS_ACTIVITY);
+        startActivityForResult(addAddressIntent, LAUNCH_ADD_STATION_ACTIVITY);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == LAUNCH_ADD_ADDRESS_ACTIVITY) {
+        if (requestCode == LAUNCH_ADD_STATION_ACTIVITY) {
             if (resultCode == RESULT_OK) {
                 Toast.makeText(getApplicationContext(), "Route added", Toast.LENGTH_LONG).show();
                 finish();

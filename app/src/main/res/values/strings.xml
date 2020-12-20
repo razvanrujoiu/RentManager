@@ -15,7 +15,7 @@
     <string name="empty_email_error">E-mail field must not be empty!</string>
     <string name="empty_password_error">Password field must not be empty!</string>
     <string name="register">Register</string>
-    <string name="title_activity_add_address">AddAddressActivity</string>
+    <string name="title_activity_add_station">AddAStationActivity</string>
     <string name="station_name">Station Name</string>
     <string name="street_name">Street Name</string>
     <string name="street_number">Street number</string>
@@ -50,7 +50,7 @@
     <string name="add_station">Add station</string>
     <string name="get_routes">Get routes</string>
     <string name="clear_routes">Clear routes</string>
-    <string name="add_residence">Add route</string>
+    <string name="add_route">Add route</string>
     <string name="routes">Routes</string>
     <string name="location">Location</string>
     <string name="notifications">Notifications</string>

@@ -8,5 +8,5 @@ import retrofit2.http.GET;
 public interface RouteService {
 
     @GET(".")
-    Call<RouteList> getResidences();
+    Call<RouteList> getRoutes();
 }

@@ -32,12 +32,12 @@ public class RouteRepository {
         return allRoutes;
     }
 
-    public LiveData<RouteWithStations> getResidenceByUserId(long userId) {
+    public LiveData<RouteWithStations> getRoutesByUserId(long userId) {
         return routeDao.getRouteByUserId(userId);
     }
 
-    public LiveData<RouteWithStations> getResidenceById(long residenceId) {
-        return routeDao.getRouteById(residenceId);
+    public LiveData<RouteWithStations> getRouteById(long routeId) {
+        return routeDao.getRouteById(routeId);
     }
 
 
