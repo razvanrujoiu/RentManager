@@ -1,6 +1,6 @@
 package com.example.urbanmobility.http;
 
-import com.example.urbanmobility.models.ResidenceList;
+import com.example.urbanmobility.models.RouteList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -8,5 +8,5 @@ import retrofit2.http.GET;
 public interface RouteService {
 
     @GET(".")
-    Call<ResidenceList> getResidences();
+    Call<RouteList> getResidences();
 }

@@ -3,7 +3,6 @@ package com.example.urbanmobility.activities;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,9 +13,7 @@ import com.example.urbanmobility.R;
 import com.example.urbanmobility.databinding.ActivityAddRouteBinding;
 import com.example.urbanmobility.models.Route;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
 public class AddRouteActivity extends AppCompatActivity {
 
@@ -64,7 +61,7 @@ public class AddRouteActivity extends AppCompatActivity {
         String estimatedTime = binding.estimatedTimeTextView.getText().toString().trim();
 
         if (routeNumber.isEmpty()) {
-            binding.routeNoTextView.setError(getString(R.string.end_rental_date_required));
+            binding.routeNoTextView.setError(getString(R.string.route_number_required));
             binding.routeNoTextView.requestFocus();
             return;
         }
@@ -83,7 +80,7 @@ public class AddRouteActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == LAUNCH_ADD_ADDRESS_ACTIVITY) {
             if (resultCode == RESULT_OK) {
-                Toast.makeText(getApplicationContext(), "Residence added", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Route added", Toast.LENGTH_LONG).show();
                 finish();
             }
         }

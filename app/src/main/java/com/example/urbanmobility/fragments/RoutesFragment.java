@@ -14,14 +14,13 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
-import com.example.urbanmobility.R;
 import com.example.urbanmobility.Utils.InternetConnection;
 import com.example.urbanmobility.adapters.RouteAdapter;
 import com.example.urbanmobility.databinding.FragmentRoutesBinding;
 import com.example.urbanmobility.http.RetrofitClient;
 import com.example.urbanmobility.http.RouteService;
 import com.example.urbanmobility.models.Route;
-import com.example.urbanmobility.models.ResidenceList;
+import com.example.urbanmobility.models.RouteList;
 import com.example.urbanmobility.models.RouteWithStations;
 import com.example.urbanmobility.models.Station;
 import com.example.urbanmobility.viewmodels.RouteViewModel;
@@ -144,11 +143,11 @@ public class RoutesFragment extends Fragment implements View.OnClickListener {
     void loadResidencesFromApi() {
         if (InternetConnection.checkConnection(getContext())) {
             RouteService routeService = RetrofitClient.getResidenceService();
-            Call<ResidenceList> call = routeService.getResidences();
+            Call<RouteList> call = routeService.getResidences();
 
-            call.enqueue(new Callback<ResidenceList>() {
+            call.enqueue(new Callback<RouteList>() {
                 @Override
-                public void onResponse(Call<ResidenceList> call, Response<ResidenceList> response) {
+                public void onResponse(Call<RouteList> call, Response<RouteList> response) {
                     if (response.isSuccessful()) {
                         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
                         long userId = sharedPreferences.getLong("userId", 0);
@@ -162,7 +161,7 @@ public class RoutesFragment extends Fragment implements View.OnClickListener {
                 }
 
                 @Override
-                public void onFailure(Call<ResidenceList> call, Throwable t) {
+                public void onFailure(Call<RouteList> call, Throwable t) {
                     Toast.makeText(getContext(), "Error while fetching data from API", Toast.LENGTH_SHORT).show();
                 }
             });

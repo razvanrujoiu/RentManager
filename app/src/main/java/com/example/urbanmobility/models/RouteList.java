@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class ResidenceList {
+public class RouteList {
 
-    @SerializedName("residences")
+    @SerializedName("routes")
     @Expose
     private ArrayList<RouteWithStations> routes = null;
 

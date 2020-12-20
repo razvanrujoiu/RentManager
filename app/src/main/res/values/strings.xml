@@ -36,7 +36,7 @@
     <string name="number_of_rooms_required_error">Please input number of rooms</string>
     <string name="construction_year_required_error">Construction year required</string>
     <string name="rental_price_required_error">Rental price required</string>
-    <string name="end_rental_date_required">End rental date required</string>
+    <string name="route_number_required">Route number required</string>
     <string name="username">Username</string>
     <string name="new_password">New password</string>
     <string name="phone_number">Phone number</string>
