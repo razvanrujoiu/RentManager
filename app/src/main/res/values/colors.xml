@@ -6,4 +6,8 @@
     <color name="white">#FFFFFF</color>
     <color name="lightGray">#ACACAC</color>
     <color name="toolbarGray">#717070</color>>
+    <color name="darkestGray">#424141</color>
+    <color name="mediumGray">#959595</color>
+    <color name="lightestGray">#CCCCCC</color>
+
 </resources>
