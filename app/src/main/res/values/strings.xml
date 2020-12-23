@@ -60,5 +60,6 @@
         Ride smart.</string>
     <string name="route_number">Route number:</string>
     <string name="estimated_route_time">Estimated route time:</string>
+    <string name="add_a_route">Add a route</string>
 
 </resources>
